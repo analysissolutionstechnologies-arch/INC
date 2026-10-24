@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="CashMovePopup" t-inherit="point_of_sale.CashMovePopup" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('input-amount')]" position="before">
+            <div class="alert alert-info" style="padding: 5px">
+                Current amount in cash: <span t-esc="env.utils.formatCurrency(info.default_cash_details.amount)" />
+            </div>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="l10n_gt_view_move_form" model="ir.ui.view">
+            <field name="name">l10n_gt_extra.account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+<!--                <button name="button_draft" position="after">
+                    <button name="impuesto_global" id="impuesto_global" string="Generar Impuesto" class="btn-primary" type="object"/>
+                </button> -->
+                <field name="fiscal_position_id" position="after">
+                    <field name="tipo_gasto"/>
+                    <field name="nota_debito" invisible="1"/>
+                    <field name="diario_facturas_por_rangos" invisible="1"/>
+                    <field name="serie_rango"  invisible="[('diario_facturas_por_rangos','=',False)]"/>
+                    <field name="inicial_rango"  invisible="[('diario_facturas_por_rangos','=',False)]"/>
+                    <field name="final_rango"  invisible="[('diario_facturas_por_rangos','=',False)]"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="l10n_gt_view_account_payment_form" model="ir.ui.view">
+            <field name="name">l10n_gt_extra.account.payment.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <header position="inside">
+<!--                        <button name="anular" modifiers="{'invisible': [('state', '!=', 'posted')]}" string="Anular" type="object"/> -->
+                    </header>
+                    <xpath expr="//group/group[3]" position="before">
+                        <group>
+                            <field name="anulado" readonly="1" invisible="1"/>
+                            <field name="fecha_anulacion" readonly="1" invisible="1"/>
+                            <field name="descripcion"/>
+                            <field name="numero_viejo" invisible="1" readonly="True"/>
+                            <field name="nombre_impreso" invisible="1"/>
+                            <field name="no_negociable" invisible="1"/>
+                        </group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="l10n_gt_view_account_supplier_payment_tree" model="ir.ui.view">
+            <field name="name">l10n_gt_extra.account.supplier.payment.tree</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+<!--                    <field name="fecha_anulacion"/> -->
+                </field> 
+            </field>
+        </record>
+        
+        <record id="l10n_gt_view_account_journal_form" model="ir.ui.view">
+            <field name="name">l10n_gt_extra.view_account_journal_form</field>
+            <field name="model">account.journal</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Extra">
+                        <group name="extra" string="Extra">
+                            <group>
+                                <field name="direccion"  invisible="1"/>
+                                <field name="codigo_establecimiento"  invisible="1"/>
+                                <field name="facturas_por_rangos"  invisible="1"/>
+                                <field name="usar_referencia"  invisible="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<odoo>
+  <record id="view_helpdesk_ticket_form_inherit_motivo_submotivo" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.form.inherit.motivo.submotivo</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="studio_customization.odoo_studio_helpdesk_fe365d3f-e7e1-46ae-baf9-819f23dc49df"/>
+    <field name="arch" type="xml">
+      <!-- Filtra Motivo por el valor seleccionado en x_studio_motivo_1 -->
+      <xpath expr="//field[@name='x_studio_motivo']" position="attributes">
+        <attribute name="domain">[('x_studio_motivo_padre','=', x_studio_categoria)]</attribute>
+      </xpath>
+
+      <!-- Filtra Submotivo por el valor seleccionado en x_studio_motivo -->
+      <xpath expr="//field[@name='x_studio_submotivo']" position="attributes">
+        <attribute name="domain">[('x_studio_motivo_padre','=', x_studio_motivo)]</attribute>
+      </xpath>
+    </field>
+  </record>
+</odoo>

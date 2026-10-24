@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ProductsWidget" t-inherit="point_of_sale.ProductsWidget" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ProductCard" position="replace">
+            <ProductCard
+                class="pos.productViewMode"
+                name="product.display_name"
+                productId="product.id"
+                price="product.getFormattedUnitPrice()"
+                imageUrl="pos.show_product_images and product.getImageUrl()"
+                onClick="() =>this.pos.addProductToCurrentOrder(product)"
+                productInfo="true"
+                onProductInfoClick="() => this.onProductInfoClick(product)"
+                hide_in_pos="product.hide_in_pos"
+            />
+        </xpath>
+    </t>
+
+    <t t-name="ProductCard" t-inherit="point_of_sale.ProductCard" t-inherit-mode="extension" owl="1">
+    	<xpath expr="//article" position="attributes">
+            <attribute name="t-attf-style">display:{{props.hide_in_pos ? 'none !important':'inline-block !important'}}</attribute>
+    	</xpath>
+    </t>
+</templates>

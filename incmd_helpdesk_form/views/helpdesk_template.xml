@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_helpdesk_form_inherit_form_7" inherit_id="website_helpdesk.team_form_7">
+
+        <xpath expr="//form" position="after">
+            <script><![CDATA[
+                document.addEventListener('DOMContentLoaded', function () {
+                    var input = document.querySelector('input[name="x_studio_numero_de_autorizacion"]');
+                    var tablaProductos = document.querySelector('#ui_tabla_productos_visual tbody');
+
+                    function limpiarSoloNumeros(valor) {
+                        return (valor || '').replace(/\D/g, '');
+                    }
+
+                    function normalizarTexto(valor) {
+                        return (valor || '')
+                            .toString()
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .replace(/\s+/g, ' ')
+                            .trim()
+                            .toLowerCase();
+                    }
+
+                    function bloquearCampo(selector) {
+                        var field = document.querySelector(selector);
+                        if (!field) {
+                            return;
+                        }
+                        field.readOnly = true;
+                        field.setAttribute('readonly', 'readonly');
+                        field.classList.add('bg-light');
+                    }
+
+                    function setInputValue(selector, value) {
+                        var field = document.querySelector(selector);
+                        if (!field) {
+                            return;
+                        }
+                        field.value = value || '';
+                        field.readOnly = true;
+                        field.setAttribute('readonly', 'readonly');
+                        field.classList.add('bg-light');
+                        field.dispatchEvent(new Event('input', { bubbles: true }));
+                        field.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+
+                    function detectarSiFilaEsMoto(fila) {
+                        if (!fila) {
+                            return false;
+                        }
+
+                        var valorActual = fila.getAttribute('data-es-moto');
+                        if (valorActual === '1') {
+                            return true;
+                        }
+                        if (valorActual === '0') {
+                            return false;
+                        }
+
+                        var primerTd = fila.querySelector('td');
+                        var textoFila = normalizarTexto(primerTd ? primerTd.textContent : fila.textContent);
+
+                        if (!textoFila) {
+                            fila.setAttribute('data-es-moto', '0');
+                            return false;
+                        }
+
+                        var productos = window.mis_productos_odoo || [];
+                        var esMoto = productos.some(function (prod) {
+                            if (!prod || !prod.es_moto) {
+                                return false;
+                            }
+
+                            var nombre = normalizarTexto(prod.name || '');
+                            var barcode = normalizarTexto(prod.barcode || '');
+                            var atributos = normalizarTexto(prod.mis_atributos || '');
+                            var compuesto = normalizarTexto((prod.name || '') + ' ' + (prod.mis_atributos || ''));
+
+                            if (nombre && textoFila.indexOf(nombre) !== -1) return true;
+                            if (barcode && textoFila.indexOf(barcode) !== -1) return true;
+                            if (atributos && textoFila.indexOf(atributos) !== -1) return true;
+                            if (compuesto && textoFila.indexOf(compuesto) !== -1) return true;
+                            return false;
+                        });
+
+                        fila.setAttribute('data-es-moto', esMoto ? '1' : '0');
+                        return esMoto;
+                    }
+
+                    function actualizarVisibilidadDocumentosMoto() {
+                        var bloque = document.getElementById('bloque_documentos_moto');
+                        var inputFile = document.getElementById('attachment');
+
+                        if (!bloque) return;
+
+                        var hayMoto = false;
+                        var filas = document.querySelectorAll('#ui_tabla_productos_visual tbody tr');
+
+                        filas.forEach(function (fila) {
+                            if (detectarSiFilaEsMoto(fila)) {
+                                hayMoto = true;
+                            }
+                        });
+
+                        if (hayMoto) {
+                            bloque.style.display = '';
+                            if (inputFile) inputFile.required = true;
+                        } else {
+                            bloque.style.display = 'none';
+                            if (inputFile) {
+                                inputFile.required = false;
+                                inputFile.value = '';
+                            }
+                        }
+                    }
+
+                    if (!input) return;
+                    if (document.getElementById('btn_consultar_autorizacion')) return;
+
+                    var form = input.closest('form');
+                    var submitBtn = null;
+                    if (form) {
+                        submitBtn =
+                            form.querySelector('.s_website_form_send') ||
+                            form.querySelector('button[type="submit"]') ||
+                            form.querySelector('.oe_submit_btn');
+                    }
+
+                    function ocultarBotonCrear() {
+                        if (submitBtn) {
+                            submitBtn.style.display = 'none';
+                            submitBtn.disabled = true;
+                        }
+                    }
+
+                    function mostrarBotonCrear() {
+                        if (submitBtn) {
+                            submitBtn.style.display = '';
+                            submitBtn.disabled = false;
+                        }
+                    }
+
+                    function contarArticulos() {
+                        return document.querySelectorAll('#ui_tabla_productos_visual tbody tr').length;
+                    }
+
+                    function tieneArticulos() {
+                        return contarArticulos() > 0;
+                    }
+
+                    function tieneDatosCompletos(data) {
+                        if (!data) return false;
+
+                        return !!(
+                            (data.nombre || '').trim() &&
+                            (data.telefono || '').trim() &&
+                            (data.nit || '').trim() &&
+                            (data.dpi || '').trim() &&
+                            (data.direccion || '').trim()
+                        );
+                    }
+
+                    function direccionEntregaValida() {
+                        var campo = document.querySelector(
+                            'input[name="x_studio_direccion_entrega"], textarea[name="x_studio_direccion_entrega"]'
+                        );
+                        if (!campo) return false;
+                        return (campo.value || '').trim().length > 0;
+                    }
+
+                    function puedeCrearTicket() {
+                        var flag = document.getElementById('autorizacion_validada_ok');
+                        var valorConsultado = document.getElementById('autorizacion_consultada_valor');
+                        var autorizacionActual = limpiarSoloNumeros(input.value).trim();
+
+                        var autorizacionValida = flag && flag.value === '1';
+                        var mismaAutorizacion = valorConsultado && valorConsultado.value === autorizacionActual;
+                        var articulosValidos = tieneArticulos();
+                        var direccionValida = direccionEntregaValida();
+
+                        return !!(autorizacionValida && mismaAutorizacion && articulosValidos && direccionValida);
+                    }
+
+                    function reevaluarBotonCrear() {
+                        if (puedeCrearTicket()) {
+                            mostrarBotonCrear();
+                        } else {
+                            ocultarBotonCrear();
+                        }
+                    }
+
+                    function setEstadoAutorizacion(valido, autorizacion) {
+                        var flag = document.getElementById('autorizacion_validada_ok');
+                        var valor = document.getElementById('autorizacion_consultada_valor');
+
+                        if (flag) {
+                            flag.value = valido ? '1' : '0';
+                        }
+                        if (valor) {
+                            valor.value = autorizacion || '';
+                        }
+
+                        reevaluarBotonCrear();
+                    }
+
+                    if (tablaProductos) {
+                        var observer = new MutationObserver(function () {
+                            actualizarVisibilidadDocumentosMoto();
+                            reevaluarBotonCrear();
+                        });
+
+                        observer.observe(tablaProductos, {
+                            childList: true,
+                            subtree: true,
+                            characterData: true
+                        });
+
+                        tablaProductos.addEventListener('input', function () {
+                            actualizarVisibilidadDocumentosMoto();
+                            reevaluarBotonCrear();
+                        });
+
+                        tablaProductos.addEventListener('change', function () {
+                            actualizarVisibilidadDocumentosMoto();
+                            reevaluarBotonCrear();
+                        });
+
+                        tablaProductos.addEventListener('click', function () {
+                            setTimeout(function () {
+                                actualizarVisibilidadDocumentosMoto();
+                                reevaluarBotonCrear();
+                            }, 50);
+                        });
+                    }
+
+                    actualizarVisibilidadDocumentosMoto();
+                    reevaluarBotonCrear();
+
+                    bloquearCampo('input[name="x_studio_nombre_del_cliente"]');
+                    bloquearCampo('input[name="x_studio_telefono_cliente"]');
+                    bloquearCampo('input[name="x_studio_nit_del_cliente"]');
+                    bloquearCampo('input[name="x_studio_dpi_del_cliente"]');
+                    bloquearCampo('input[name="x_studio_direccion_del_cliente"]');
+                    bloquearCampo('input[name="x_studio_valor_factura"]');
+                    bloquearCampo('input[name="x_studio_valor_pagare"]');
+                    bloquearCampo('input[name="x_studio_poe"]');
+
+                    var campoDireccionEntrega = document.querySelector(
+                        'input[name="x_studio_direccion_entrega"], textarea[name="x_studio_direccion_entrega"]'
+                    );
+                    if (campoDireccionEntrega) {
+                        campoDireccionEntrega.required = true;
+                        campoDireccionEntrega.addEventListener('input', function () {
+                            reevaluarBotonCrear();
+                        });
+                        campoDireccionEntrega.addEventListener('change', function () {
+                            reevaluarBotonCrear();
+                        });
+                    }
+
+                    var contenedorInput = input.parentElement;
+                    if (!contenedorInput) return;
+
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'd-flex align-items-center gap-2';
+
+                    contenedorInput.insertBefore(wrapper, input);
+                    wrapper.appendChild(input);
+
+                    input.style.flex = '1';
+                    input.style.minWidth = '0';
+                    input.setAttribute('inputmode', 'numeric');
+                    input.setAttribute('autocomplete', 'off');
+                    input.setAttribute('maxlength', '20');
+
+                    var btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.id = 'btn_consultar_autorizacion';
+                    btn.className = 'btn btn-primary';
+                    btn.textContent = 'Consultar';
+                    btn.style.whiteSpace = 'nowrap';
+                    btn.disabled = true;
+                    wrapper.appendChild(btn);
+
+                    var msg = document.createElement('div');
+                    msg.id = 'msg_consulta_autorizacion';
+                    msg.className = 'small mt-2 d-none';
+                    contenedorInput.appendChild(msg);
+
+                    function actualizarEstadoBoton() {
+                        var valor = limpiarSoloNumeros(input.value);
+                        btn.disabled = !valor;
+                    }
+
+                    function limpiarCamposConsulta() {
+                        setInputValue('input[name="x_studio_nombre_del_cliente"]', '');
+                        setInputValue('input[name="x_studio_telefono_cliente"]', '');
+                        setInputValue('input[name="x_studio_nit_del_cliente"]', '');
+                        setInputValue('input[name="x_studio_dpi_del_cliente"]', '');
+                        setInputValue('input[name="x_studio_direccion_del_cliente"]', '');
+                        setInputValue('input[name="x_studio_valor_factura"]', '');
+                        setInputValue('input[name="x_studio_valor_pagare"]', '');
+                        setInputValue('input[name="x_studio_poe"]', '');
+                    }
+
+                    ocultarBotonCrear();
+                    setEstadoAutorizacion(false, '');
+
+                    input.addEventListener('input', function () {
+                        var limpio = limpiarSoloNumeros(input.value);
+                        if (input.value !== limpio) {
+                            input.value = limpio;
+                        }
+
+                        setEstadoAutorizacion(false, '');
+                        limpiarCamposConsulta();
+
+                        msg.classList.add('d-none');
+                        msg.classList.remove('text-danger', 'text-success');
+                        btn.textContent = 'Consultar';
+                        actualizarEstadoBoton();
+                    });
+
+                    input.addEventListener('keypress', function (e) {
+                        var charCode = e.which || e.keyCode;
+                        if (charCode === 8 || charCode === 13) return;
+                        var charStr = String.fromCharCode(charCode);
+                        if (!/[0-9]/.test(charStr)) {
+                            e.preventDefault();
+                        }
+                    });
+
+                    input.addEventListener('paste', function () {
+                        setTimeout(function () {
+                            input.value = limpiarSoloNumeros(input.value);
+                            setEstadoAutorizacion(false, '');
+                            limpiarCamposConsulta();
+                            actualizarEstadoBoton();
+                        }, 0);
+                    });
+
+                    actualizarEstadoBoton();
+
+                    btn.addEventListener('click', async function () {
+                        var autorizacion = limpiarSoloNumeros(input.value).trim();
+                        input.value = autorizacion;
+
+                        msg.classList.add('d-none');
+                        msg.classList.remove('text-danger', 'text-success');
+
+                        if (!autorizacion) {
+                            msg.textContent = 'Debe ingresar el número de autorización.';
+                            msg.classList.remove('d-none');
+                            msg.classList.add('text-danger');
+                            btn.disabled = true;
+                            setEstadoAutorizacion(false, '');
+                            return;
+                        }
+
+                        btn.disabled = true;
+                        btn.textContent = 'Consultando...';
+
+                        try {
+                            const response = await fetch('/consultar/autorizacion', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ autorizacion: autorizacion })
+                            });
+
+                            const rpc = await response.json();
+                            const data = rpc.result || {};
+
+                            if (data.ok && tieneDatosCompletos(data.data)) {
+                                msg.textContent = data.message || 'Consulta realizada correctamente.';
+                                msg.classList.remove('d-none');
+                                msg.classList.add('text-success');
+
+                                setInputValue('input[name="x_studio_nombre_del_cliente"]', data.data.nombre);
+                                setInputValue('input[name="x_studio_telefono_cliente"]', data.data.telefono);
+                                setInputValue('input[name="x_studio_nit_del_cliente"]', data.data.nit);
+                                setInputValue('input[name="x_studio_dpi_del_cliente"]', data.data.dpi);
+                                setInputValue('input[name="x_studio_direccion_del_cliente"]', data.data.direccion);
+                                setInputValue('input[name="x_studio_valor_factura"]', data.data.factura);
+                                setInputValue('input[name="x_studio_valor_pagare"]', data.data.pagare);
+                                setInputValue('input[name="x_studio_poe"]', data.data.poe);
+
+                                setEstadoAutorizacion(true, autorizacion);
+
+                                btn.textContent = 'Consultado';
+                                btn.disabled = false;
+                            } else {
+                                limpiarCamposConsulta();
+                                setEstadoAutorizacion(false, '');
+
+                                msg.textContent = data.message || 'La consulta no fue exitosa o no devolvió todos los datos requeridos.';
+                                msg.classList.remove('d-none');
+                                msg.classList.add('text-danger');
+                                btn.textContent = 'Consultar';
+                                btn.disabled = false;
+                            }
+                        } catch (error) {
+                            limpiarCamposConsulta();
+                            setEstadoAutorizacion(false, '');
+                            msg.textContent = 'Ocurrió un error al consultar la autorización.';
+                            msg.classList.remove('d-none');
+                            msg.classList.add('text-danger');
+                            btn.textContent = 'Consultar';
+                            btn.disabled = false;
+                        }
+                    });
+
+                    if (form) {
+                        form.addEventListener('submit', function (e) {
+                            var flag = document.getElementById('autorizacion_validada_ok');
+                            var valorConsultado = document.getElementById('autorizacion_consultada_valor');
+                            var autorizacionActual = limpiarSoloNumeros(input.value).trim();
+
+                            var autorizacionValida = flag && flag.value === '1';
+                            var mismaAutorizacion = valorConsultado && valorConsultado.value === autorizacionActual;
+
+                            if (!autorizacionActual) {
+                                e.preventDefault();
+                                msg.textContent = 'Debe ingresar y consultar el número de autorización antes de crear el ticket.';
+                                msg.classList.remove('d-none', 'text-success');
+                                msg.classList.add('text-danger');
+                                ocultarBotonCrear();
+                                return false;
+                            }
+
+                            if (!autorizacionValida || !mismaAutorizacion) {
+                                e.preventDefault();
+                                msg.textContent = 'Debe validar correctamente la autorización y obtener datos antes de crear el ticket.';
+                                msg.classList.remove('d-none', 'text-success');
+                                msg.classList.add('text-danger');
+                                ocultarBotonCrear();
+                                return false;
+                            }
+
+                            if (!tieneArticulos()) {
+                                e.preventDefault();
+                                msg.textContent = 'Debe agregar al menos un artículo antes de crear el ticket.';
+                                msg.classList.remove('d-none', 'text-success');
+                                msg.classList.add('text-danger');
+                                ocultarBotonCrear();
+                                return false;
+                            }
+
+                            if (!direccionEntregaValida()) {
+                                e.preventDefault();
+                                msg.textContent = 'Debe ingresar la dirección de entrega de producto.';
+                                msg.classList.remove('d-none', 'text-success');
+                                msg.classList.add('text-danger');
+                                ocultarBotonCrear();
+                                return false;
+                            }
+                        });
+                    }
+                });
+            ]]></script>
+        </xpath>
+
+        <xpath expr="//form" position="before">
+            <t t-set="py_empleados" t-value="[]"/>
+            <t t-foreach="request.env['hr.employee'].sudo().search([])" t-as="emp">
+                <t t-set="py_empleados" t-value="py_empleados + [{'name': emp.name, 'dept': emp.department_id.name or ''}]"/>
+            </t>
+
+            <t t-set="py_departamentos" t-value="[]"/>
+            <t t-foreach="request.env['hr.department'].sudo().search([('name', 'like', 'AGENCIA BDA%')])" t-as="dep">
+                <t t-set="py_departamentos" t-value="py_departamentos + [{'id': dep.id, 'name': dep.name, 'email': dep.x_studio_correo or ''}]"/>
+            </t>
+
+            <t t-set="py_productos" t-value="[]"/>
+            <t t-foreach="request.env['product.product'].sudo().search([('sale_ok', '=', True)], limit=False)" t-as="prod">
+                <t t-set="str_atributos" t-value="''"/>
+                <t t-if="prod.x_studio_es_moto_1">
+                    <t t-foreach="prod.product_template_variant_value_ids" t-as="variant_val">
+                        <t t-set="str_atributos" t-value="str_atributos + ' [' + variant_val.attribute_id.name + ': ' + variant_val.name + ']'"/>
+                    </t>
+                </t>
+
+                <t t-set="py_productos" t-value="py_productos + [{
+                    'id': prod.id,
+                    'name': prod.name,
+                    'barcode': prod.barcode or '',
+                    'es_moto': prod.x_studio_es_moto_1 or False,
+                    'mis_atributos': str_atributos,
+                    'qty_available': prod.qty_available
+                }]"/>
+            </t>
+
+            <t t-set="py_almacenes" t-value="[]"/>
+            <t t-foreach="request.env['stock.warehouse'].sudo().search([('x_studio_habilitacion_formulario_bda', '=', True)])" t-as="wh">
+                <t t-set="py_almacenes" t-value="py_almacenes + [wh.name]"/>
+            </t>
+
+            <script>
+                window.mis_empleados_odoo = <t t-out="json.dumps(py_empleados)"/>;
+                window.mis_departamentos_odoo = <t t-out="json.dumps(py_departamentos)"/>;
+                window.mis_productos_odoo = <t t-out="json.dumps(py_productos)"/>;
+                window.mis_almacenes_odoo = <t t-out="json.dumps(py_almacenes)"/>;
+            </script>
+        </xpath>
+
+        <xpath expr="//div[hasclass('s_website_form_rows')]" position="before">
+            <div class="container mb-4">
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="fa fa-building me-2"/>
+                    <strong>Agencia Seleccionada: </strong>
+                    <span id="visual_tienda_name" class="ms-2 text-uppercase fw-bold">Esperando selección...</span>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[hasclass('s_website_form_submit')]" position="before">
+
+            <div class="mb-4 col-12 p-3 bg-light border rounded shadow-sm">
+                <h5 class="mb-3 text-secondary"><i class="fa fa-list-alt"/> Detalle de Productos</h5>
+                <div class="row g-2 align-items-end">
+                    <div class="col-md-8">
+                        <label class="form-label text-muted small">Buscar por Nombre o Código de Barras</label>
+                        <input type="text" id="ui_buscar_producto" list="lista_sugerencias_productos" class="form-control" placeholder="Escriba para buscar..."/>
+                        <datalist id="lista_sugerencias_productos"></datalist>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_agregar_producto" class="btn btn-secondary w-100 fw-bold">AGREGAR</button>
+                    </div>
+                </div>
+                <div class="table-responsive mt-3">
+                    <table class="table table-sm table-hover bg-white border" id="ui_tabla_productos_visual">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="ps-3">Producto</th>
+                                <th style="width: 10%; text-align: center;">Cant.</th>
+                                <th style="width: 50px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle"></tbody>
+                    </table>
+                    <div id="msg_sin_productos" class="text-center text-muted p-4 border border-dashed rounded bg-white">
+                        <small>No se han agregado productos a la solicitud.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bloque_solicitud_creacion_vendedor" class="mb-4 col-12 p-3 bg-white border rounded shadow-sm" style="display:none;">
+                <h5 class="mb-3 text-secondary">
+                    <i class="fa fa-user-plus"/> Solicitud de creación de vendedor
+                </h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre del vendedor</label>
+                        <input type="text" name="x_studio_nombre_vendedor_nuevo" class="form-control s_website_form_input" placeholder="Ingrese el nombre completo"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">DPI del vendedor</label>
+                        <input type="text" name="x_studio_dpi_vendedor_nuevo" class="form-control s_website_form_input" placeholder="Ingrese el DPI" maxlength="13" inputmode="numeric"/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bloque_documentos_moto" class="mb-4 col-12 p-3 bg-white border rounded shadow-sm" style="display:none;">
+                <div class="form-group s_website_form_field row s_col_no_resize s_col_no_bgcolor">
+                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="attachment">
+                        <span class="s_website_form_label_content">
+                            <i class="fa fa-paperclip me-2"/>Archivos adjuntos
+                        </span>
+                    </label>
+                    <div class="col-sm">
+                        <input type="file"
+                               class="form-control s_website_form_input"
+                               name="attachment"
+                               id="attachment"
+                               multiple="multiple"/>
+                        <small class="text-muted">Puede seleccionar uno o varios documentos cuando el producto sea moto.</small>
+                    </div>
+                </div>
+            </div>
+
+        </xpath>
+
+        <xpath expr="//form" position="inside">
+            <div class="d-none">
+                <textarea class="form-control s_website_form_input" name="description" id="hidden_description_field"></textarea>
+                <input type="hidden" name="x_studio_correo_alerta" id="x_studio_correo_alerta"/>
+                <input type="hidden" id="autorizacion_validada_ok" value="0"/>
+                <input type="hidden" id="autorizacion_consultada_valor" value=""/>
+            </div>
+        </xpath>
+
+        <xpath expr="//form" position="after">
+            <div id="modalSeleccion" class="modal" tabindex="-1" role="dialog" style="display:none; z-index: 9999; position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.9);">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="margin-top: 5%;">
+                    <div class="modal-content shadow-lg border-primary">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title fw-bold">Selección de Agencia</h5>
+                        </div>
+                        <div class="modal-body bg-white">
+                            <p class="mb-2 fw-bold">1. Seleccione su agencia:</p>
+                            <select class="form-select border-primary" id="ui_select_agencia_modal" style="font-size: 1.1rem;">
+                                <option value="">-- Seleccione --</option>
+                            </select>
+
+                            <div id="area_validacion_token" class="mt-4 p-3 border rounded bg-light d-none">
+                                <p class="mb-2 fw-bold text-dark">2. Validación de Seguridad:</p>
+                                <p class="small text-muted mb-2">
+                                    Se enviará un código de seguridad al <strong>correo electrónico registrado</strong> de la agencia seleccionada.
+                                </p>
+
+                                <button type="button" class="btn btn-warning w-100 fw-bold text-dark" id="btn_enviar_token">
+                                    <i class="fa fa-paper-plane"/> ENVIAR CÓDIGO
+                                </button>
+                                <div id="msg_token_enviado" class="alert alert-success mt-2 mb-0 py-2 d-none">
+                                    <i class="fa fa-check-circle"/> Token enviado exitosamente.
+                                </div>
+                                <div id="msg_token_error" class="alert alert-danger mt-2 mb-0 py-2 d-none">
+                                    <i class="fa fa-exclamation-triangle"/> Error al enviar.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-light">
+                            <button type="button" class="btn btn-primary w-100" id="btn_confirmar_agencia" disabled="disabled">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalIngresoToken" class="modal" tabindex="-1" role="dialog" style="display:none; z-index: 10000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.95);">
+                <div class="modal-dialog modal-dialog-centered modal-sm" role="document" style="margin-top: 5%;">
+                    <div class="modal-content border-warning shadow-lg">
+                        <div class="modal-header bg-warning text-dark">
+                            <h5 class="modal-title fw-bold">Verificar Código</h5>
+                        </div>
+                        <div class="modal-body bg-white text-center pt-4">
+                            <i class="fa fa-lock fa-3x text-warning mb-3"/>
+                            <p class="small">Ingrese el código enviado a su correo.</p>
+                            <input type="text" id="input_token_usuario" class="form-control text-center fw-bold" style="font-size: 1.5rem; letter-spacing: 5px;" placeholder="000000" maxlength="6"/>
+                            <div id="msg_error_token" class="text-danger small mt-2 d-none fw-bold"></div>
+                            <button type="button" class="btn btn-dark w-100 mt-3" id="btn_verificar_token_final">VERIFICAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalExito" class="modal" tabindex="-1" role="dialog" style="display:none; z-index: 10001; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);">
+                <div class="modal-dialog modal-dialog-centered modal-sm" style="margin-top: 10%;">
+                    <div class="modal-content border-success shadow-lg">
+                        <div class="modal-body text-center pt-4 pb-4">
+                            <div class="text-success" style="font-size: 3rem;">✔</div>
+                            <h5 class="text-success fw-bold">Acceso Concedido</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalError" class="modal" tabindex="-1" role="dialog" style="display:none; z-index: 10001; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);">
+                <div class="modal-dialog modal-dialog-centered modal-sm" style="margin-top: 10%;">
+                    <div class="modal-content border-danger shadow-lg">
+                        <div class="modal-body text-center pt-4 pb-4">
+                            <div class="text-danger" style="font-size: 3rem;">✖</div>
+                            <h5 class="text-danger fw-bold">Error</h5>
+                            <button type="button" class="btn btn-sm btn-danger mt-2" onclick="location.reload();">Recargar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>

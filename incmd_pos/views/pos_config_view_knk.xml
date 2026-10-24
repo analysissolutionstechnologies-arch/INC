@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="knk_pos_config_view_form" model="ir.ui.view">
+        <field name="name">knk.pos.config.form.view</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//setting[@id='other_devices']" position="after">
+                <setting id="hide_refund_button" string="Hide Refund Button" help="Hide Refund Button on PoS Product Screen">
+                    <field name="hide_refund_button" />
+                </setting>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

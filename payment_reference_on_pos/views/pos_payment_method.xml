@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="pos_payment_method_view_form_inh" model="ir.ui.view">
+            <field name="name">pos.payment.method.inh</field>
+            <field name="model">pos.payment.method</field>
+            <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="bank_ids" widget="many2many_tags"/>
+                    <!-- <field name="bank_id"/> -->
+                </field>
+            </field>
+        </record>
+
+        <record id="pos_payment_method_view_tree_inh" model="ir.ui.view">
+            <field name="name">pos.payment.method.inh</field>
+            <field name="model">pos.payment.method</field>
+            <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="config_ids" position="after">
+                    <field name="bank_ids" widget="many2many_tags"/>
+                    <!-- <field name="bank_id"/> -->
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

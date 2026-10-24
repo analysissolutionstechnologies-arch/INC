@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_gt_toponim" model="ir.ui.view">
+            <field name="name">view.partner.form.city</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+ 
+
+                <xpath expr="//div[hasclass('o_address_format')]"  position="replace">
+                            <div class="o_address_format">
+
+                                <field name="street" placeholder="Street..." class="o_address_street" />
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"   />
+
+                                <!-- <field name="city_id" widget="selection" placeholder="Comuna" class="o_address_state"/> -->
+                                <field name="municipio_id"  
+                                        placeholder="Municipio" 
+                                        options="{'no_create': True, 'no_edit': True, 'no_quick_create': True, 'no_quick_edit': True}"
+                                        />
+                                <field name="zona_id"  
+                                        placeholder="Zona" 
+                                        options="{'no_create': True, 'no_edit': True, 'no_quick_create': True, 'no_quick_edit': True}"
+                                        />
+                                <separate name="separate" invisible="1"/>
+                                
+                                <field name="colonia_id" widget="selection" class="o_address_street"  />
+
+                                <!-- <field name="zip" placeholder="ZIPE" class="o_address_zip" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/> -->
+                                <field name="zip" placeholder="ZIPE" class="o_address_zip"  />
+                            
+                                <field name="city" invisible="1" />
+                                <field name="state_id" class="o_address_state" widget='selection' invisible="0"/>
+                                <field name="country_id"  />
+                               
+                            </div>
+                </xpath>
+
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <button name="get_autorization_cliente_netfinance" string="Verificar Cliente" type="object" class="btn-primary" />
+                </xpath>
+                    
+            </field>
+        </record>
+
+
+<record id="view_partner_form_gt_netfinance" model="ir.ui.view">
+    <field name="name">view.partner.form.netfinance</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <!-- Agregar el botón en el button_box -->
+        <xpath expr="//div[@name='button_box']" position="inside">
+            <button name="get_autorization_cliente_netfinance"
+                    string="Datos Netfinance"
+                    type="object"
+                    class="btn-primary"/>
+        </xpath>
+        
+        <!-- Agregar el botón después del campo 'mobile' -->
+        <xpath expr="//field[@name='name']" position="after">
+        <div>
+            <button name="get_autorization_cliente_netfinance"
+                    string="Datos Netfinance"
+                    icon="fa-pencil-square-o"
+                    type="object"
+                    class="btn-primary"/>
+            <separate name="separate" invisible="1"/>
+        </div>
+        </xpath>
+        <xpath expr="//field[@name='vat']" position="after">
+
+
+                                <field name="partner_idPersona"  />
+
+                
+        </xpath>
+    </field>
+</record>
+<!-- 
+        <record id="view_company_form_city" model="ir.ui.view">
+            <field name="name">view.company.form.city</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='street2']" position="after">
+                    <field name="city_id" domain="[('state_id', '=', state_id)]" options="{'no_create_edit': True,'no_create': True}" placeholder="Comuna"/>
+                </xpath>
+
+            </field>
+        </record> -->
+
+
+    </data>
+</odoo>

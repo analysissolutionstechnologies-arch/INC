@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ClientDetailsEdit" t-inherit="point_of_sale.ClientDetailsEdit" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('client-details-right')]" position="inside">
+            <div class="client-detail">
+                <span class="label">DPI</span>
+                <input class="detail documento_personal_identificacion" name="documento_personal_identificacion" t-on-change="captureChange"
+                       t-att-value="props.partner.documento_personal_identificacion || ''" />
+            </div>
+            <div class="client-detail">
+                <span class="label">Pasaporte</span>
+                <input class="detail pasaporte" name="pasaporte" t-on-change="captureChange"
+                       t-att-value="props.partner.pasaporte || ''" />
+            </div>
+        </xpath>
+    </t>
+</templates>

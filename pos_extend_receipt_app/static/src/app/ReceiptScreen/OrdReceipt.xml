@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[hasclass('pos-receipt-contact')]" t-operation="after">
+			<t t-if="props.data.order.invoice_number">
+					<div align="center">
+						<h3><u>Numero de Factura</u></h3> 
+						<td>
+							<h3><strong><t t-esc="props.data.order.invoice_number"/></strong></h3>
+						</td>
+					</div>
+
+			</t>
+
+			<t t-if="props.data.order.fel_serie">
+					<div align="center">
+						<strong><span>FEL SERIE : <t t-esc="props.data.order.fel_serie"/></span> </strong><br></br>
+						 
+					</div>
+
+					<div align="center">
+						<strong><span>FEL N°  : <t t-esc="props.data.order.fel_numero"/> </span></strong> 
+						 
+					</div>
+
+
+					<div align="center">
+						<span><u>N° Autorizacion :</u></span> 
+						<td>
+							<span><strong><t t-esc="props.data.order.fel_numero_autorizacion"/></strong></span>
+						</td>
+					</div>
+					
+
+			</t>
+		</xpath>
+		<xpath expr="//div[hasclass('pos-receipt-contact')]" t-operation="after">
+			<!-- <br/> -->
+			<t t-if="props.data.is_order_number">
+				<div align="center">
+					<t t-if="props.data.is_order_number">
+						<t t-esc='props.data.order.name'/><br/>
+					</t>
+				</div>
+			</t>
+			<t t-if="props.data.is_customer_details">
+				<br/>
+				<t t-if="props.data.order.partner">
+					<div style="text-align: left;font-size: 13px;" align="center">
+						<t t-if="props.data.is_customer_name">
+							<b> Cliente : </b>
+							<t t-esc='props.data.order.partner.name'/>
+							<br/>
+						</t>
+						<t t-if="props.data.customer_address">
+							<b> Dirección : </b>
+							<t t-if="props.data.order.partner.address">
+								<t t-esc='props.data.order.partner.address'/>
+							</t><br/>
+						</t>
+						<t t-if="props.data.customer_mobile">
+							<b> Celular : :</b>
+							<t t-if="props.data.order.partner.mobile">
+								<t t-esc='props.data.order.partner.mobile'/>
+							</t><br/>
+						</t>
+						<t t-if="props.data.customer_phone">
+							<b> Telefono : </b>
+							<t t-if="props.data.order.partner.phone">
+								<t t-esc='props.data.order.partner.phone'/>
+							</t><br/>
+						</t>
+						<t t-if="props.data.customer_email">
+							<b> Correo : </b>
+							<t t-if="props.data.order.partner.email">
+								<t t-esc='props.data.order.partner.email'/>
+							</t><br/>
+						</t>
+						<t t-if="props.data.customer_vat">
+							<b> NIT : </b>
+							<t t-if="props.data.order.partner.vat">
+								<t t-esc='props.data.order.partner.vat'/>
+							</t><br/>
+						</t>
+						<t t-if="props.data.customer_vat">
+							<b> DPI : </b>
+							<t t-if="props.data.order.cliente_dpi">
+        						<t t-esc="props.data.order.cliente_dpi"/>
+							</t><br/>
+						</t>
+
+						<t t-if="props.data.order.plazo">
+							<b> Plazo : </b>
+							<t t-if="props.data.order.plazo">
+        						<t t-esc="props.data.order.plazo"/>
+							</t><br/>
+						</t>
+
+						<t t-if="props.data.order.tipo_flujo">
+							<b> Tipo de Flujo : </b>
+							<t t-if="props.data.order.tipo_flujo">
+        						<t t-esc="props.data.order.tipo_flujo"/>
+							</t><br/>
+						</t>
+
+						<t t-if="props.data.order.cuota_autorizada">
+							<b> Cuota Autorizada : </b>
+							<t t-if="props.data.order.cuota_autorizada">
+        						<t t-esc="props.data.order.cuota_autorizada"/>
+							</t><br/>
+						</t>
+
+					</div>
+				</t>
+			</t>
+			
+		</xpath>
+	</t>
+	<t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[hasclass('pos-receipt')]" position="inside">
+			<t t-if="props.data.headerData.order_barcode">
+				<t t-if="props.data.headerData.barcode_selection == 'qrcode'">
+					<div class="text-center" align="center">
+						<img t-att-src="props.data.headerData.qrcode" style="height: 200px;width: 200px;"/>
+					</div>
+				</t>
+				<t t-if="props.data.headerData.barcode_selection == 'barcode'">
+					<div class="text-center" align="center">
+						<img t-att-src="props.data.headerData.barcode" style="height: 50px;width: 230px;"/>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</t>
+</templates>

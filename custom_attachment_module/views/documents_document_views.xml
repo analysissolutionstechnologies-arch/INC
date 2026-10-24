@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="document_view_kanban_inherit_backblaze" model="ir.ui.view">
+        <field name="name">documents.document kanban backblaze</field>
+        <field name="model">documents.document</field>
+        <field name="inherit_id" ref="documents.document_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='id']" position="after">
+                <field name="attachment_id" invisible="1"/>
+                <field name="has_external_url" invisible="1"/>
+            </xpath>
+            <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="inside">
+                <button name="action_open_backblaze_url" type="object"
+                    class="btn btn-link btn-sm p-0"
+                    invisible="not has_external_url"
+                    title="Ver archivo en Backblaze">
+                    <i class="fa fa-external-link"/> Ver
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

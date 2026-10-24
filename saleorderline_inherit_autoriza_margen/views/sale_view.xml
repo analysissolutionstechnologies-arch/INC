@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Campos en las líneas de orden -->
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="price_list" 
+                       widget="monetary" 
+                       options="{'currency_field': 'currency_id'}" 
+                       optional="show"/>
+                <field name="price_unit_netfinance" 
+                       widget="monetary" 
+                       options="{'currency_field': 'currency_id'}" 
+                       optional="show"/>
+                <field name="diferencia_netfinance" 
+                       widget="monetary" 
+                       options="{'currency_field': 'currency_id'}" 
+                       optional="show"/>
+                <field name="porcentaje_odoo_presente" 
+                       widget="percentage" 
+                       optional="show"/>
+                <field name="porcentaje_netfinance" 
+                       widget="percentage" 
+                       optional="show"/>
+            </xpath>
+
+            <!-- Campos en el

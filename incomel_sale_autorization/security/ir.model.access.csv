@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_municipio,access_municipio,res.municipioGT,base.group_user,1,1,1,1
+access_zona,access_zona,res.zonaGT,base.group_user,1,1,1,1
+access_colonia,access_colonia,res.coloniaGT,base.group_user,1,1,1,1
+access_department,access_department,res.country.state,base.group_user,1,1,1,1

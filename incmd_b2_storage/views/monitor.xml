@@ -1,0 +1,135 @@
+<odoo>
+  <record id="view_repository_monitor" model="ir.ui.view">
+    <field name="name">incmd.b2.repository.monitor</field>
+    <field name="model">incmd.b2.repository</field>
+    <field name="arch" type="xml">
+      <kanban create="false" default_order="name">
+        <field name="name" />
+        <field name="active" />
+        <field name="bucket" />
+        <field name="storage_environment" />
+        <field name="remote_count" />
+        <field name="pending_count" />
+        <field name="due_count" />
+        <field name="exhausted_count" />
+        <field name="remote_mib" />
+        <field name="pending_mib" />
+        <field name="done_24h" />
+        <field name="errors_24h" />
+        <field name="cleanup_count" />
+        <field name="last_transfer" />
+        <field name="cron_active" />
+        <field name="next_execution" />
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_card">
+              <div class="d-flex justify-content-between">
+                <strong>
+                  <field name="name" />
+                </strong>
+                <span class="badge text-bg-secondary">
+                  <field name="storage_environment" />
+                </span>
+              </div>
+              <div class="text-muted mb-2">
+                <field name="bucket" />
+              </div>
+              <div t-if="!record.active.raw_value" class="alert alert-secondary" role="status">Repositorio archivado</div>
+              <div class="row mb-2">
+                <div class="col-6">
+                  <a name="action_remote" type="object">
+                    <strong>
+                      <field name="remote_count" />
+                    </strong> en Backblaze</a>
+                </div>
+                <div class="col-6">
+                  <a name="action_pending" type="object">
+                    <strong>
+                      <field name="pending_count" />
+                    </strong> pendientes</a>
+                </div>
+              </div>
+              <div>Fecha de reintento cumplida: <field name="due_count" />
+              </div>
+              <div>
+                <a name="action_exhausted" type="object">Intentos agotados: <field name="exhausted_count" />
+                </a>
+              </div>
+              <hr />
+              <div>Contenido remoto registrado: <field name="remote_mib" /> MiB</div>
+              <div>Contenido pendiente: <field name="pending_mib" /> MiB</div>
+              <div class="text-muted small">Tamaño lógico en Odoo; no es el uso físico del bucket.</div>
+              <hr />
+              <div>Transferencias últimas 24 h: <field name="done_24h" />
+              </div>
+              <div>
+                <a name="action_recent_errors" type="object">Fallos últimas 24 h: <field name="errors_24h" />
+                </a>
+              </div>
+              <div>
+                <a name="action_cleanup_pending" type="object">Limpiezas sin confirmar: <field name="cleanup_count" />
+                </a>
+              </div>
+              <div>Última transferencia: <field name="last_transfer" />
+              </div>
+              <div>Tarea: <span t-if="record.cron_active.raw_value" class="text-success">Activa</span>
+                <span t-else="" class="text-muted">Inactiva / sin crear</span>
+              </div>
+              <div>Próxima ejecución: <field name="next_execution" />
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a type="open" class="btn btn-primary btn-sm" role="button">Abrir repositorio</a>
+                <a name="action_audit" type="object" class="btn btn-secondary btn-sm" role="button">Historial</a>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+  <record id="action_monitor" model="ir.actions.act_window">
+    <field name="name">Monitoreo Backblaze</field>
+    <field name="res_model">incmd.b2.repository</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="view_id" ref="view_repository_monitor" />
+    <field name="context">{'active_test': False}</field>
+    <field name="help" type="html">
+      <p>Configura un repositorio para comenzar el monitoreo.</p>
+    </field>
+  </record>
+  <record id="view_repository_monitor_form" model="ir.ui.view">
+    <field name="name">incmd.b2.repository.monitor.form</field>
+    <field name="model">incmd.b2.repository</field>
+    <field name="inherit_id" ref="view_repository_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//sheet" position="inside">
+        <group string="Monitoreo operativo">
+          <group>
+            <field name="remote_count" />
+            <field name="pending_count" />
+            <field name="due_count" />
+            <field name="exhausted_count" />
+            <field name="remote_mib" />
+            <field name="pending_mib" />
+          </group>
+          <group>
+            <field name="done_24h" />
+            <field name="errors_24h" />
+            <field name="cleanup_count" />
+            <field name="last_transfer" />
+            <field name="cron_active" />
+            <field name="next_execution" />
+          </group>
+        </group>
+        <div class="text-muted">Los tamaños son lógicos. La fecha cumplida no garantiza que el archivo siga cumpliendo las reglas actuales. Actualiza la página para renovar indicadores.</div>
+        <div class="mt-2">
+          <button name="action_pending" type="object" string="Ver pendientes" />
+          <button name="action_recent_errors" type="object" string="Ver fallos recientes" />
+          <button name="action_cleanup_pending" type="object" string="Ver limpiezas" />
+          <button name="action_audit" type="object" string="Ver historial" />
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <menuitem id="menu_monitor" name="Monitoreo" parent="menu_b2" action="action_monitor" sequence="0" groups="base.group_system" />
+</odoo>

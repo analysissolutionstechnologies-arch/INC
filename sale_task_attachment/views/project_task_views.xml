@@ -1,0 +1,16 @@
+<!-- sale_task_attachment/views/project_task_views.xml -->
+<odoo>
+    <record id="view_task_form_inherit_sale_order_attachments" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.sale.order.attachments</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <!-- Campo para mostrar los archivos adjuntos de la orden de venta relacionada -->
+                    <field name="sale_order_attachment_ids" widget="many2many_binary"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

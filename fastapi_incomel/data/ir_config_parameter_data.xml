@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <function 
+            model="res.config.settings"
+            name="generator_fastapi_params"/>
+
+        <function 
+            model="ir.attachment"
+            name="generate_access_token_fix"/>            
+    </data>
+</odoo>

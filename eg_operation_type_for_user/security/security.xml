@@ -1,0 +1,5 @@
+<odoo>
+    <record id="access_vendor_type" model="res.groups">
+        <field name="name">Manage Vendor Type</field>
+    </record>
+</odoo>

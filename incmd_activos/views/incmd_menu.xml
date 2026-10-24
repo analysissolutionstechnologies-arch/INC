@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_incmd_activos_root" name="Activos Fijos" sequence="20" groups="incmd_activos.group_incmd_activos_user" web_icon="incmd_activos,static/src/img/icon.png"/>
+    <menuitem id="menu_incmd_activos" name="Activos" parent="menu_incmd_activos_root" action="action_incmd_activo" sequence="10"/>
+    <menuitem id="menu_incmd_activos_export" name="Exportar XLSX" parent="menu_incmd_activos_root" action="action_incmd_activo_export_xlsx" sequence="20" groups="incmd_activos.group_incmd_activos_manager"/>
+</odoo>

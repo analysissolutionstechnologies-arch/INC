@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Interruptores independientes de publicación de los catálogos.
+         True = habilitado / False = deshabilitado. -->
+    <record id="ir_config_parameter_incmd_catalogo_incomel_enabled" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.incomel.enabled</field>
+        <field name="value">True</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_tecnialiado_enabled" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.tecnialiado.enabled</field>
+        <field name="value">True</field>
+    </record>
+
+    <record id="ir_config_parameter_incmd_catalogo_page_size" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.page_size</field>
+        <field name="value">12</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_incomel_page_size" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.incomel.page_size</field>
+        <field name="value">12</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_tecnialiado_page_size" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.tecnialiado.page_size</field>
+        <field name="value">12</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_incomel_locations" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.incomel.location_keywords</field>
+        <field name="value">siner/existencias:Bodega Sinergias,centr/existencias:Bodega Central</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_tecnialiado_locations" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.tecnialiado.location_keywords</field>
+        <field name="value">siner/existencias:Bodega Sinergias,centr/existencias:Bodega Central</field>
+    </record>
+
+    <record id="ir_config_parameter_incmd_catalogo_incomel_phone" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.incomel.phone</field>
+        <field name="value">502 2420-9300</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_tecnialiado_phone" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.tecnialiado.phone</field>
+        <field name="value">502 2420-9300</field>
+    </record>
+
+    <record id="ir_config_parameter_incmd_catalogo_incomel_whatsapp" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.incomel.whatsapp</field>
+        <field name="value">50259518116</field>
+    </record>
+    <record id="ir_config_parameter_incmd_catalogo_tecnialiado_whatsapp" model="ir.config_parameter">
+        <field name="key">incmd_catalogo.tecnialiado.whatsapp</field>
+        <field name="value">50259518116</field>
+    </record>
+
+</odoo>

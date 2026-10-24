@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_incmd_activo_user,incmd.activo.user,model_incmd_activo,incmd_activos.group_incmd_activos_user,1,1,0,0
+access_incmd_activo_manager,incmd.activo.manager,model_incmd_activo,incmd_activos.group_incmd_activos_manager,1,1,1,1
+access_incmd_activo_history_user,incmd.activo.history.user,model_incmd_activo_history,incmd_activos.group_incmd_activos_user,1,1,1,0
+access_incmd_activo_history_manager,incmd.activo.history.manager,model_incmd_activo_history,incmd_activos.group_incmd_activos_manager,1,1,1,1
+access_incmd_activo_auth_wizard,incmd.activo.auth.wizard,model_incmd_activo_auth_wizard,incmd_activos.group_incmd_activos_manager,1,1,1,1
+access_incmd_activo_traslado_wizard,incmd.activo.traslado.wizard,model_incmd_activo_traslado_wizard,incmd_activos.group_incmd_activos_user,1,1,1,1

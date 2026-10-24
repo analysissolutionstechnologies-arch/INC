@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Heredar el formulario de tickets -->
+    <template id="website_helpdesk_form_inherit" inherit_id="website_helpdesk.ticket_submit_form">
+        <!-- No necesitamos modificar el HTML si solo aplicaremos filtros vía JS -->
+        <!-- Opcionalmente podemos agregar un comentario para confirmar que se hereda -->
+        <xpath expr="//form" position="before">
+            <!-- Este comentario confirma que nuestra herencia funciona -->
+            <div class="d-none"><!-- Herencia de formulario activa --></div>
+        </xpath>
+    </template>
+</odoo>

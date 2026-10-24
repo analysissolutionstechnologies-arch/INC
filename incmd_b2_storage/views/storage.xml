@@ -1,0 +1,281 @@
+<odoo>
+  <record id="view_repository_list" model="ir.ui.view">
+    <field name="name">incmd.b2.repository.list</field>
+    <field name="model">incmd.b2.repository</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name" />
+        <field name="active" />
+        <field name="bucket" />
+        <field name="region" />
+        <field name="migration_enabled" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_repository_form" model="ir.ui.view">
+    <field name="name">incmd.b2.repository.form</field>
+    <field name="model">incmd.b2.repository</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="action_test" type="object" string="Probar conexión" />
+          <button name="action_sync_cron" type="object" string="Crear / actualizar tarea" />
+          <button name="action_restart_pending" type="object" string="Reiniciar pendientes" />
+          <button name="action_batch" type="object" string="Ejecutar lote" />
+        </header>
+        <sheet>
+          <group>
+            <group string="Datos del repositorio">
+              <field name="name" />
+              <field name="active" />
+              <field name="endpoint" />
+              <field name="region" />
+              <field name="bucket" />
+              <field name="key_id" groups="base.group_system" />
+              <field name="application_key" password="True" groups="base.group_system" />
+            </group>
+            <group string="Organización de archivos">
+              <field name="folder" />
+              <field name="storage_environment" />
+              <field name="path_timezone" string="Zona horaria de carpetas y horario" />
+            </group>
+          </group>
+          <group>
+            <group string="Envío al cargar">
+              <field name="upload_mode" />
+              <div colspan="2" class="text-muted">Al cargar: intenta enviar inmediatamente; si falla o hay otra transferencia, conserva el archivo local y lo deja pendiente.</div>
+            </group>
+            <group string="Reintentos de archivos pendientes">
+              <field name="retry_minutes" />
+              <field name="max_attempts" />
+              <field name="retry_enabled" />
+              <field name="retry_hour" invisible="not retry_enabled" />
+              <field name="retry_batch_size" invisible="not retry_enabled" />
+              <field name="retry_batch_seconds" invisible="not retry_enabled" />
+              <field name="retry_cron_id" readonly="1" />
+              <button name="action_retry_batch" type="object" string="Ejecutar reintentos ahora" class="btn-secondary" />
+              <div colspan="2" class="text-muted">Las transferencias fallidas se reintentan en una tarea independiente, en horario distinto al histórico.</div>
+            </group>
+          </group>
+          <group>
+            <group string="Tarea programada y horario">
+              <field name="automatic_enabled" />
+              <field name="interval_number" string="Frecuencia de revisión" />
+              <field name="interval_type" string="Unidad de frecuencia" />
+              <field name="night_only" />
+              <field name="night_start" invisible="not night_only" />
+              <field name="night_end" invisible="not night_only" />
+              <field name="cron_id" />
+              <div colspan="2" class="text-muted">El horario aplica a la cola y al histórico. Ejecutar lote también respeta esa ventana. Guarde y pulse Crear / actualizar tarea para aplicar la frecuencia y la activación.</div>
+            </group>
+            <group string="Migración histórica">
+              <field name="migration_enabled" string="Migrar archivos existentes" />
+              <div colspan="2" class="text-muted">Recorre los adjuntos existentes según las reglas y conserva el avance. Puede probarlo manualmente con Ejecutar lote.</div>
+            </group>
+          </group>
+          <group string="Límites de recursos y transferencias">
+            <group>
+              <field name="batch_size" string="Candidatos por lote" />
+              <field name="max_mb" string="Tamaño máximo por archivo (MiB)" />
+              <field name="batch_seconds" />
+            </group>
+            <group>
+              <field name="batch_failure_limit" />
+              <div colspan="2" class="text-muted">-1 = sin límite por errores; el tamaño y tiempo del lote siguen vigentes.</div>
+              <field name="network_timeout" />
+            </group>
+          </group>
+          <group string="Contingencia de errores" groups="base.group_system">
+            <field name="contingency_enabled"/>
+            <field name="recovery_reserve_mib"/>
+            <div colspan="2" class="text-muted">La contingencia detiene nuevas transferencias y conserva las lecturas remotas. Las operaciones ya iniciadas pueden terminar. La recuperación requiere acceso a Backblaze y espacio local; procesa un lote por pulsación sin eliminar objetos remotos. Al desactivar la contingencia, los archivos recuperados pueden volver a migrarse según las reglas.</div>
+            <button name="action_contingency_test" type="object" string="Comprobar lectura remota" class="btn-secondary"/>
+            <button name="action_contingency_recover" type="object" string="Recuperar lote al filestore" class="btn-secondary" invisible="not contingency_enabled"/>
+            <field name="contingency_result" nolabel="1" colspan="2"/>
+          </group>
+          <separator string="Documentos a enviar y exclusiones" />
+          <field name="rule_ids" string="Documentos a enviar" mode="tree,form" context="{'default_repository_id': id}">
+            <tree>
+              <field name="scope" />
+              <field name="sequence" />
+              <field name="active" />
+              <field name="module_id" />
+              <field name="model_id" />
+              <field name="document_type_ids" widget="many2many_tags" options="{'no_quick_create': True}" />
+            </tree>
+            <form>
+              <header>
+                <button name="action_preview" type="object" string="Vista previa de coincidencias" />
+                <button name="action_reset" type="object" string="Reiniciar recorrido histórico" />
+              </header>
+              <sheet>
+                <group>
+                  <field name="sequence" />
+                  <field name="scope" />
+                  <field name="excluded_module_ids" widget="many2many_tags" invisible="scope != 'global'" options="{'no_quick_create': True}" />
+                  <field name="excluded_model_ids" widget="many2many_tags" invisible="scope != 'global'" options="{'no_quick_create': True}" />
+                  <field name="include_product_images" string="Autorizar imágenes principales de productos" />
+                  <div colspan="2" class="text-muted">El alcance global incluye los módulos de negocio. Las imágenes guardadas en campos de productos requieren esta autorización adicional y los tipos JPG/PNG seleccionados. Las exclusiones siguen aplicando.</div>
+                  <field name="active" />
+                  <field name="repository_id" readonly="1" invisible="1" force_save="1" />
+                  <field name="module_id" invisible="scope == 'global'" />
+                  <field name="model_id" invisible="scope == 'global'" />
+                  <field name="document_type_ids" widget="many2many_tags" options="{'no_quick_create': True}" />
+                </group>
+                <group string="Configuración avanzada" invisible="document_type_ids">
+                  <field name="mime_types" string="Tipos MIME manuales" />
+                  <field name="extensions" string="Extensiones manuales" />
+                </group>
+                <group string="Opciones adicionales">
+                  <field name="allow_extensionless" />
+                  <field name="field_names" />
+                  <field name="cursor_id" />
+                </group>
+              </sheet>
+            </form>
+          </field>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_repository" model="ir.actions.act_window">
+    <field name="name">Repositorios</field>
+    <field name="res_model">incmd.b2.repository</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="view_rule_list" model="ir.ui.view">
+    <field name="name">incmd.b2.rule.list</field>
+    <field name="model">incmd.b2.rule</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="scope" />
+        <field name="sequence" />
+        <field name="active" />
+        <field name="repository_id" />
+        <field name="module_id" />
+        <field name="model_id" />
+        <field name="document_type_ids" widget="many2many_tags" options="{'no_quick_create': True}" />
+        <field name="mime_types" optional="hide" />
+        <field name="extensions" optional="hide" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_rule_form" model="ir.ui.view">
+    <field name="name">incmd.b2.rule.form</field>
+    <field name="model">incmd.b2.rule</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="action_preview" type="object" string="Vista previa de coincidencias" />
+          <button name="action_reset" type="object" string="Reiniciar recorrido histórico" />
+        </header>
+        <sheet>
+          <group>
+            <field name="sequence" />
+            <field name="scope" />
+            <field name="include_product_images" />
+            <field name="active" />
+            <field name="repository_id" readonly="1" force_save="1" />
+            <field name="module_id" invisible="scope == 'global'" />
+            <field name="model_id" invisible="scope == 'global'" />
+            <field name="document_type_ids" widget="many2many_tags" options="{'no_quick_create': True}" />
+          </group>
+          <group string="Configuración avanzada" invisible="document_type_ids">
+            <field name="mime_types" string="Tipos MIME manuales" />
+            <field name="extensions" string="Extensiones manuales" />
+          </group>
+          <group string="Opciones adicionales">
+            <field name="allow_extensionless" />
+                  <field name="field_names" />
+            <field name="cursor_id" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_rule" model="ir.actions.act_window">
+    <field name="name">Reglas por modelo</field>
+    <field name="res_model">incmd.b2.rule</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="view_audit_list" model="ir.ui.view">
+    <field name="name">incmd.b2.audit.list</field>
+    <field name="model">incmd.b2.audit</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="create_date" />
+        <field name="attachment_number" />
+        <field name="name" />
+        <field name="res_model" />
+        <field name="res_id" />
+        <field name="res_field" />
+        <field name="repository_id" />
+        <field name="state" />
+        <field name="detail" />
+        <field name="local_released" />
+        <field name="cleanup_attempts" />
+        <field name="cleanup_next_try" />
+        <field name="cleanup_error" />
+      </tree>
+    </field>
+  </record>
+  <record id="view_audit_form" model="ir.ui.view">
+    <field name="name">incmd.b2.audit.form</field>
+    <field name="model">incmd.b2.audit</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="attachment_id" />
+            <field name="attachment_number" />
+            <field name="name" />
+            <field name="res_model" />
+            <field name="res_id" />
+            <field name="res_field" />
+            <field name="repository_id" />
+            <field name="old_location" />
+            <field name="remote_key" />
+            <field name="state" />
+            <field name="detail" />
+            <field name="local_released" />
+        <field name="cleanup_attempts" />
+        <field name="cleanup_next_try" />
+        <field name="cleanup_error" />
+            <field name="create_date" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_audit" model="ir.actions.act_window">
+    <field name="name">Transferencias</field>
+    <field name="res_model">incmd.b2.audit</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem id="menu_b2" name="Backblaze" parent="base.menu_administration" groups="base.group_system" sequence="95" />
+  <menuitem id="menu_repository" name="Repositorios" parent="menu_b2" action="action_repository" sequence="1" />
+  <menuitem id="menu_audit" name="Transferencias" parent="menu_b2" action="action_audit" sequence="3" />
+  <record id="menu_rule" model="ir.ui.menu">
+    <field name="active" eval="False" />
+    <field name="name">Reglas por modelo</field>
+    <field name="parent_id" ref="menu_b2" />
+    <field name="action" eval="False" />
+    <field name="sequence">2</field>
+  </record>
+  <record id="view_document_type_form" model="ir.ui.view">
+    <field name="name">incmd.b2.document.type.form</field>
+    <field name="model">incmd.b2.document.type</field>
+    <field name="arch" type="xml">
+      <form string="Tipo de documento">
+        <sheet>
+          <group>
+            <field name="name" string="Nombre" placeholder="Video MP4"/>
+            <field name="mime_types" string="Tipos MIME" placeholder="video/mp4"/>
+            <field name="extensions" string="Extensiones" placeholder="mp4"/>
+          </group>
+          <div class="text-muted">Para varios valores, sepárelos por comas. Escriba las extensiones sin punto: mp4,mov.</div>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

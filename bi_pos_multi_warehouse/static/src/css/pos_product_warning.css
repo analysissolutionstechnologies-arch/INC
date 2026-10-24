@@ -1,0 +1,31 @@
+#pos-product-warning {
+    position: fixed;
+    top: 50%; /* Distancia desde la parte superior */
+    right: 20%; /* Alineado a la derecha */
+    background-color: #f44336; /* Fondo rojo */
+    color: white; /* Texto blanco */
+    padding: 15px 25px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita para visibilidad */
+    text-align: left; /* Texto alineado a la izquierda */
+    max-width: 300px; /* Máximo ancho del mensaje */
+    word-wrap: break-word; /* Ajustar texto a una nueva línea si es necesario */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para mejor visibilidad */
+    z-index: 10001; /* Prioridad sobre otros elementos */
+    animation: fadeInOut 3s ease; /* Animación para mostrar y ocultar suavemente */
+}
+
+/* Animación para mostrar y ocultar */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(20px); }
+    10% { opacity: 1; transform: translateX(0); }
+    90% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(20px); }
+}
+
+
+
+
+
+

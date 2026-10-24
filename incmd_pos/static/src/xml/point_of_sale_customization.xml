@@ -1,0 +1,48 @@
+<!-- <templates id="template" xml:space="preserve">
+    <t t-name="FilteredPaymentMethods">
+        <div class="payment-screen">
+            <h2>Métodos de Pago Filtrados</h2>
+            <div class="payment-methods">
+                <t t-foreach="payment_methods" t-as="method">
+                    <div class="payment-method">
+                        <button
+                            t-att-class="method.is_selected ? 'selected' : ''"
+                            t-on-click="selectPaymentMethod(method)">
+                            <span t-esc="method.display_name" />
+                        </button>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates> -->
+
+<templates id="template" xml:space="preserve">
+    <t t-name="FilteredPaymentMethods">
+        <div class="payment-screen">
+            <h2>Métodos de Pago Filtrados</h2>
+            <div class="payment-methods">
+                <!-- Ciclo a través de los métodos de pago filtrados -->
+                <t t-foreach="payment_methods" t-as="method">
+                    <div class="payment-method">
+                        <button
+                            t-att-class="method.is_selected ? 'selected' : ''"
+                            t-on-click="selectPaymentMethod(method)">
+                            <span t-esc="method.display_name" />
+                        </button>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Aquí se integra el Numpad -->
+            <div class="numpad-container">
+                <Numpad inputMode="payment"/>
+            </div>
+        </div>
+    </t>
+</templates>
+
+
+
+
+

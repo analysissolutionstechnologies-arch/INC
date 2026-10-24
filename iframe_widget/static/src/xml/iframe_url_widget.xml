@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="iframe_widget.IframeUrlWidget">
+        <div class="o_field_iframe_url">
+            <t t-if="showIframe">
+                <iframe 
+                    t-att-src="iframeUrl"
+                    width="100%" 
+                    height="600px"
+                    frameborder="0"
+                    style="border: 1px solid #ddd; border-radius: 4px;"
+                />
+            </t>
+            <t t-else="">
+                <div class="text-muted" style="padding: 20px; text-align: center; border: 1px dashed #ddd; border-radius: 4px;">
+                    No hay URL configurada para mostrar
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

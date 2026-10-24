@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_config_settings_item_count">
+            <field name="name">res.config.setting.pos.item.form.view</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@id='pos_interface_section']" position="after">
+                    <h2 name="order">Type of POS order</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="enable_order_type">
+                            <div class="o_setting_left_pane">
+                                <field name="enable_order_type"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="enable_order_type" string='Enable Type of POS order' />
+                                <div class="content-group mt16">
+                                    <field name="order_type_ids" colspan="4" nolabel="1" widget="many2many_tags" invisible="not enable_order_type" required="enable_order_type"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pos_sale_order_inherit">
+            <field name="name">pos.order.view.form</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="order_type_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="pos_order_type_tree_view" model="ir.ui.view">
+            <field name="name">pos.order.type.tree.view</field>
+            <field name="model">pos.order.type</field>
+            <field name="arch" type="xml">
+                <tree string="Type of POS order">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pos_order_type_form_view" model="ir.ui.view">
+            <field name="name">pos.order.type.form.view</field>
+            <field name="model">pos.order.type</field>
+            <field name="arch" type="xml">
+                <form string="Type of POS order">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pos_order_type">
+            <field name="name">Pos Type of POS order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pos.order.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem parent="point_of_sale.menu_point_config_product" action="action_pos_order_type" id="menu_pos_copan_setting"
+            sequence="30" name="Types of POS order"/>
+    </data>
+</odoo>

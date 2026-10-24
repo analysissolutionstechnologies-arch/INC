@@ -1,0 +1,72 @@
+<templates xml:space="preserve">
+ <t t-name="incmd_b2_storage.DocumentCarousel">
+  <div class="border rounded p-2" style="width:320px;max-width:100%">
+   <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="text-muted small">Documentos de la cotización</span>
+    <button type="button" class="btn btn-link btn-sm p-0" title="Actualizar documentos" aria-label="Actualizar documentos" t-on-click="refresh" t-att-disabled="state.loading"><i class="fa fa-refresh"/></button>
+   </div>
+   <div t-if="state.loading" class="text-center text-muted p-3">Cargando…</div>
+   <div t-elif="state.error" class="text-center text-muted p-3">No se pudieron cargar los documentos. Intenta actualizar.</div>
+   <t t-elif="current">
+    <div class="d-flex align-items-center justify-content-between" style="height:180px">
+     <button type="button" class="btn btn-link px-1" aria-label="Documento anterior" t-on-click="previous" t-att-disabled="state.documents.length &lt; 2"><i class="fa fa-chevron-left"/></button>
+     <div t-if="isPdf or isOdt or isVideo" style="width:240px;height:175px;max-height:70vh">
+      <video t-if="isVideo" t-att-key="current.id" t-att-src="original" controls="controls" preload="none" playsinline="playsinline" style="width:100%;height:100%;object-fit:contain;background:#000">
+       El navegador no puede reproducir este video. <a t-att-href="original" target="_blank" rel="noopener">Abrir video</a>
+      </video>
+      <iframe t-elif="isPdf" t-att-key="current.id" t-att-src="original" title="Vista previa PDF" style="width:100%;height:100%;border:0"/>
+      <div t-else="" class="bg-white border p-2" style="height:100%;overflow:auto">
+       <div class="text-muted small">Vista de texto ODT</div>
+       <div t-if="state.odtLoading">Cargando documento…</div>
+       <div t-elif="state.odtError">No se pudo mostrar la vista previa.</div>
+       <div t-else="" style="white-space:pre-wrap" t-esc="state.odtText || 'El documento no contiene texto para mostrar.'"/>
+      </div>
+     </div>
+     <a t-else="" t-att-href="original" target="_blank" rel="noopener" title="Abrir documento ampliado" style="width:240px;text-align:center">
+      <img t-if="isImage" t-att-src="source" alt="Documento de la cotización" style="max-width:100%;height:175px;object-fit:contain"/>
+      <div t-else="" class="text-muted"><i class="fa fa-file-o" style="font-size:64px"/><div class="small mt-2">Abrir documento</div></div>
+     </a>
+     <button type="button" class="btn btn-link px-1" aria-label="Documento siguiente" t-on-click="next" t-att-disabled="state.documents.length &lt; 2"><i class="fa fa-chevron-right"/></button>
+    </div>
+    <div class="text-center small text-break mt-2"><t t-esc="current.name"/></div>
+    <div class="text-center text-muted small"><t t-esc="state.index + 1"/> / <t t-esc="state.documents.length"/></div>
+   </t>
+   <div t-else="" class="text-center text-muted p-3">No hay documentos cargados.</div>
+  </div>
+ </t>
+ <t t-name="incmd_b2_storage.ProjectDocumentCarousel">
+  <div class="border rounded p-2" style="width:1100px;max-width:100%">
+   <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="text-muted small">Documentos para validar</span>
+    <button type="button" class="btn btn-link btn-sm p-0" title="Actualizar documentos" aria-label="Actualizar documentos" t-on-click="refresh" t-att-disabled="state.loading"><i class="fa fa-refresh"/></button>
+   </div>
+   <div t-if="state.loading" class="text-center text-muted p-3">Cargando…</div>
+   <div t-elif="state.error" class="text-center text-muted p-3">No se pudieron cargar los documentos. Intenta actualizar.</div>
+   <t t-elif="current">
+    <div class="d-flex align-items-center justify-content-between" style="height:620px;max-height:75vh">
+     <button type="button" class="btn btn-link px-1" aria-label="Documento anterior" t-on-click="previous" t-att-disabled="state.documents.length &lt; 2"><i class="fa fa-chevron-left"/></button>
+     <div t-if="isPdf or isOdt or isVideo" style="width:calc(100% - 80px);height:600px;max-height:70vh">
+      <video t-if="isVideo" t-att-key="current.id" t-att-src="original" controls="controls" preload="none" playsinline="playsinline" style="width:100%;height:100%;object-fit:contain;background:#000">
+       El navegador no puede reproducir este video. <a t-att-href="original" target="_blank" rel="noopener">Abrir video</a>
+      </video>
+      <iframe t-elif="isPdf" t-att-key="current.id" t-att-src="original" title="Vista previa PDF" style="width:100%;height:100%;border:0"/>
+      <div t-else="" class="bg-white border p-2" style="height:100%;overflow:auto">
+       <div class="text-muted small">Vista de texto ODT</div>
+       <div t-if="state.odtLoading">Cargando documento…</div>
+       <div t-elif="state.odtError">No se pudo mostrar la vista previa.</div>
+       <div t-else="" style="white-space:pre-wrap" t-esc="state.odtText || 'El documento no contiene texto para mostrar.'"/>
+      </div>
+     </div>
+     <a t-else="" t-att-href="original" target="_blank" rel="noopener" title="Abrir documento ampliado" style="width:calc(100% - 80px);text-align:center">
+      <img t-if="isImage" t-att-src="source" alt="Documento de la tarea" style="max-width:100%;height:600px;max-height:70vh;object-fit:contain"/>
+      <div t-else="" class="text-muted"><i class="fa fa-file-o" style="font-size:64px"/><div class="small mt-2">Abrir documento</div></div>
+     </a>
+     <button type="button" class="btn btn-link px-1" aria-label="Documento siguiente" t-on-click="next" t-att-disabled="state.documents.length &lt; 2"><i class="fa fa-chevron-right"/></button>
+    </div>
+    <div class="text-center small text-break mt-2"><t t-esc="current.name"/></div>
+    <div class="text-center text-muted small"><t t-esc="state.index + 1"/> / <t t-esc="state.documents.length"/></div>
+   </t>
+   <div t-else="" class="text-center text-muted p-3">No hay documentos cargados.</div>
+  </div>
+ </t>
+</templates>

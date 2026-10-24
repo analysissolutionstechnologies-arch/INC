@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t owl="1" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension" t-name="ReceiptHeader">
+		<xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
+			<td style="width: 25%;">Tipo de Pedido :<t t-esc="env.services.pos.get_order().get_order_type()"/></td>
+			<br />
+		</xpath>
+	</t>
+
+</templates>

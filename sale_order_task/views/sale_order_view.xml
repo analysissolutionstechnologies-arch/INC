@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.task</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Mover la pestaña de Tareas Relacionadas al final -->
+            <xpath expr="//sheet/notebook/page[last()]" position="after">
+                <page string="Tareas Relacionadas">
+                    <field name="task_ids" readonly="1">
+                        <tree string="Tareas">
+                            <field name="name"/>
+                            <field name="stage_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sale_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.task</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="tasks_info" widget="text"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

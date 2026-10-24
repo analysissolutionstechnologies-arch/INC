@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="incmd_catalog_config_incomel" model="incmd.catalog.config">
+        <field name="name">Incomel</field>
+        <field name="key">incomel</field>
+        <field name="sequence">10</field>
+        <field name="page_size">12</field>
+        <field name="active">1</field>
+    </record>
+    <record id="incmd_catalog_config_tecnialiado" model="incmd.catalog.config">
+        <field name="name">Tecnialiado</field>
+        <field name="key">tecnialiado</field>
+        <field name="sequence">20</field>
+        <field name="page_size">12</field>
+        <field name="active">1</field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_incmd_activos_auth_password" model="ir.config_parameter">
+        <field name="key">incmd_activos.auth_password</field>
+        <field name="value">Incomel123456*</field>
+    </record>
+</odoo>

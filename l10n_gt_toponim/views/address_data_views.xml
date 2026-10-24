@@ -1,0 +1,162 @@
+
+<odoo>
+    <data>
+
+        <!-- Centry Line form view -->
+        <record id="view_municipiogt_form" model="ir.ui.view">
+            <field name="name">municipiogt</field>
+            <field name="model">res.municipiogt</field>
+            <field name="arch" type="xml">
+                <form string="Municipios">
+                    <header>
+                            <button name="cargar_data_excel"
+                                invisible="archivo_data == False"
+                                string="Crear Toponims" 
+                                type="object" 
+                                class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                     
+                        <group>
+                        
+                        
+                            <field name="archivo_data" invisible="0"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="state_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Centry Line tree view -->
+        <record id="view_municipiogt_tree" model="ir.ui.view">
+            <field name="name">municipiogt</field>
+            <field name="model">res.municipiogt</field>
+            <field name="arch" type="xml">
+                <tree string="Municipios">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="state_id"/>
+                            <field name="ID_CIUDAD"/>
+                            
+                </tree>
+            </field>
+        </record>
+
+        <!-- Centry action -->
+        <record id="action_res_municipiogt" model="ir.actions.act_window">
+            <field name="name">Municipios</field>
+            <field name="res_model">res.municipiogt</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_municipios_data0" name="Municipios" action="action_res_municipiogt" parent="sale.sale_order_menu" />
+        
+
+        <!-- ZONAS -->
+        
+        <!-- ZONAS  form view -->
+        <record id="view_zonagt_form" model="ir.ui.view">
+            <field name="name">zonagt</field>
+            <field name="model">res.zonagt</field>
+            <field name="arch" type="xml">
+                <form string="zonagt">
+                     
+                    <sheet>
+                     
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+
+                            <field name="state_id"/>
+                            <field name="municipio_id"/>
+                            <field name="ID_ZONA"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ZONAS tree view -->
+        <record id="view_zonagt_tree" model="ir.ui.view">
+            <field name="name">zonagt</field>
+            <field name="model">res.zonagt</field>
+            <field name="arch" type="xml">
+                <tree string="zonagt">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="state_id"/>
+                            <field name="municipio_id"/>
+                            <field name="ID_ZONA"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ZONAS action -->
+        <record id="action_res_zonagt" model="ir.actions.act_window">
+            <field name="name">ZONAS</field>
+            <field name="res_model">res.zonagt</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_zonagt_data0" name="ZONAS" action="action_res_zonagt" parent="sale.sale_order_menu" />
+        
+
+        <!-- Colonias -->
+        
+        <!-- Colonias  form view -->
+        <record id="view_coloniagt_form" model="ir.ui.view">
+            <field name="name">coloniagt</field>
+            <field name="model">res.coloniagt</field>
+            <field name="arch" type="xml">
+                <form string="coloniagt">
+                     
+                    <sheet>
+                     
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="state_id"/>
+                            <field name="municipio_id"/>
+                            <field name="zona_id"/>
+                            <field name="ID_BARRIO"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- coloniagt tree view -->
+        <record id="view_coloniagt_tree" model="ir.ui.view">
+            <field name="name">coloniagt</field>
+            <field name="model">res.coloniagt</field>
+            <field name="arch" type="xml">
+                <tree string="coloniagt">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="state_id"/>
+                            <field name="municipio_id"/>
+
+                            <field name="zona_id"/>
+                            <field name="ID_BARRIO"/>
+
+ 
+                </tree>
+            </field>
+        </record>
+
+        <!-- coloniagt action -->
+        <record id="action_res_coloniagt" model="ir.actions.act_window">
+            <field name="name">coloniagt</field>
+            <field name="res_model">res.coloniagt</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_coloniagt_data0" name="COLONIAS" action="action_res_coloniagt" parent="sale.sale_order_menu" />
+        
+    </data>
+</odoo>

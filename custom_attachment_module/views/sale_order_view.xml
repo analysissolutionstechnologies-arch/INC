@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_order_form_inherit_attachments" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.attachments</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[last()]" position="after">
+                    <page string="Adjuntos" name="adjuntos">
+                        <!-- <group> -->
+                            <div class="o_form_buttons_edit mb-3">
+                                <button name="action_refresh_external_urls"
+                                        type="object"
+                                        string="Actualizar"
+                                        class="btn btn-primary"
+                                        icon="fa-refresh"/>
+                            </div>
+                            <field name="x_studio_adjuntos" mode="kanban">
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="datas"/>
+                                    <field name="mimetype"/>
+                                    <field name="view_extrenal_url_text"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                                <div class="oe_kanban_details">
+                                                    <strong class="oe_kanban_record_title oe_truncate">
+                                                        <field name="name"/>
+                                                    </strong>
+                                                    <div class="oe_kanban_avatar_mobile">
+                                                        <t t-if="record.view_extrenal_url_text.raw_value">
+                                                            <iframe t-att-src="record.view_extrenal_url_text.value"
+                                                                    style="height: 120px; width: 100%; border: none;"/>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        <!-- </group> -->
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

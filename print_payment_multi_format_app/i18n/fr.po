@@ -1,0 +1,124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* print_payment_multi_format_app
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-11 14:55+0000\n"
+"PO-Revision-Date: 2021-03-11 14:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid ""
+"<br/>\n"
+"\t\t\t\t\t\t\t<strong style=\"border-top: 1.5px dashed #000;\">   Approved By   </strong>"
+msgstr ""
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid ""
+"<strong style=\"font-weight: bold; font-size: 22px;\"> Receipt No. : "
+"</strong>"
+msgstr ""
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid ""
+"<strong style=\"font-weight: bold; font-size: 22px;\"> Voucher No. : "
+"</strong>"
+msgstr ""
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid ""
+"<strong>  </strong><br/>\n"
+"\t\t\t\t\t\t\t<strong style=\"border-top: 1.5px dashed #000;\"> Received By</strong>"
+msgstr ""
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid ""
+"<strong>  </strong><br/>\n"
+"\t\t\t\t\t\t\t<strong style=\"border-top: 1.5px dashed #000;\">   Paid By</strong>"
+msgstr ""
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "<strong>Payment Amount :</strong>"
+msgstr "<strong>Montant du paiement :</strong>"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "<strong>Payment Date :</strong>"
+msgstr "<strong>Date de paiement :</strong>"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "Being"
+msgstr "Étant"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "By"
+msgstr "Par"
+
+#. module: print_payment_multi_format_app
+#: model:ir.actions.report,name:print_payment_multi_format_app.full_page_payment_report_action
+msgid "Full Page Payment Voucher"
+msgstr "Bon de paiement d'une page complète"
+
+#. module: print_payment_multi_format_app
+#: model:ir.actions.report,name:print_payment_multi_format_app.half_page_payment_report_action
+msgid "Half Page Payment Voucher"
+msgstr "Bon de paiement d'une demi-page"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "Paid to Mr/Ms"
+msgstr "Payé à M. / Mme"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+msgid "Paid to Mr/Ms/Mrs"
+msgstr "Payé à M. / Mme / Mme"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "Payment Receipt"
+msgstr "Reçu"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "Payment Voucher"
+msgstr "Bon de paiement"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "Received from Mr/Ms/Mrs"
+msgstr "Reçu de M. / Mme / Mme"
+
+#. module: print_payment_multi_format_app
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.full_page_payment_voucher_template
+#: model_terms:ir.ui.view,arch_db:print_payment_multi_format_app.half_page_payment_voucher_template
+msgid "The sum of"
+msgstr "La somme de"

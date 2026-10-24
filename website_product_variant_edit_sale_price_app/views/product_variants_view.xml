@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="product_template_form_view_extended1" model="ir.ui.view">
+        <field name="name">product.template.product.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='pricing']" position="after">
+                <field name="set_attribute_price"/>
+            </xpath>
+        </field>        
+    </record>
+    <record id="product_product_normal_form_view_extended" model="ir.ui.view">
+        <field name="name">product.product.normal.form.extended</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='set_attribute_price']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='list_price']" position="replace">
+                <field name="list_price" invisible="set_attribute_price" readonly="1"/>
+            </xpath>
+            <xpath expr="//label[@for='lst_price']" position="replace">
+                <label for="new_list_price" string="Precio de Venta"/>
+            </xpath>
+            <xpath expr="//field[@name='lst_price']" position="replace">
+                <field name="new_list_price" string="Precio de Venta" invisible="not set_attribute_price"/>
+            </xpath>
+        </field>        
+    </record>
+    <record id="product_product_normal_tree_view_extended" model="ir.ui.view">
+        <field name="name">product.product.normal.form.extended</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='lst_price']" position="before">
+                <field name="set_attribute_price" column_invisible="1"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='lst_price']" position="attributes">
+                <attribute name="invisible">set_attribute_price</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='lst_price']" position="after">
+                <field name="new_list_price" invisible="not set_attribute_price" string="Precio de Venta"/>
+            </xpath>
+        </field>        
+    </record>
+
+    <record id="product_variant_easy_edit_view_extended" model="ir.ui.view">
+        <field name="name">product.variant.easy.edit.view.extended</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='standard_price']" position="before">
+                <field name="set_attribute_price" invisible="1"/>
+                <label for="new_list_price" string="Precio de Venta"/>
+                <div class="o_row">
+                    <field name="new_list_price" invisible="not set_attribute_price" string="Precio de Venta"/>
+                </div>
+            </xpath>
+            <xpath expr="//group[@name='pricing']//field[@name='lst_price']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//group[@name='pricing']/label[@for='lst_price']" position="attributes">
+                <attribute name="invisible">set_attribute_price</attribute>
+            </xpath>
+            <xpath expr="//group[@name='pricing']/label[@for='lst_price']/following-sibling::div[1]" position="attributes">
+                <attribute name="invisible">set_attribute_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

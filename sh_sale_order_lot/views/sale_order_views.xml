@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_sale_order_lot_inherit_sale_form" model="ir.ui.view">
+	<field name="name">sh.sale.order.lot.inherit.sale.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="after">
+                <!-- <field name="lot_id" domain="[('product_id','=', product_id)]" context="{'default_product_id': product_id}" groups="stock.group_production_lot"/> -->
+                <field name="available_lot_ids" optional="hide"/>
+                <field name="lot_id" domain="[('id','in', available_lot_ids)]" context="{'default_product_id': product_id}" groups="stock.group_production_lot"/>
+            
+                <!-- <field name="lot_id" domain="[('product_id','=', product_id)]" context="{'default_product_id': product_id}" groups="stock.group_production_lot"/> -->
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="after">
+                <field name="available_lot_ids" optional="hide"/>
+                <field name="lot_id" domain="[('id','in', available_lot_ids)]" context="{'default_product_id': product_id}" groups="stock.group_production_lot"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

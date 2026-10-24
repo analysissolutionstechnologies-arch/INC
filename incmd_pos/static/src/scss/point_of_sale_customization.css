@@ -1,0 +1,7 @@
+.button-active {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border-color: #4CAF50; /* Green border */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional: Adds shadow for 3D effect */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+}

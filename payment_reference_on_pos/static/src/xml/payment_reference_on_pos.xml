@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="PaymentScreenPaymentLines" t-inherit="point_of_sale.PaymentScreenPaymentLines" t-inherit-mode="extension">    
+        <xpath expr="//t[@t-if='line.selected']//div[hasclass('payment-amount')]" position="before">
+            <t t-if='pos.config.is_allow_payment_reference'>
+                <div class="payment-reference">
+                    <span class='payment-info-button pull-right' t-att-data-cid='line.cid'
+                        t-on-click="() => this.updatePaymentReference(line)">
+                    <i class='fa fa-edit'> Reference</i>
+                </span>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//t[@t-else='']//div[hasclass('payment-amount')]" position="before">
+            <t t-if='pos.config.is_allow_payment_reference'>
+                <div class="payment-reference">
+                    <span class='payment-info-button pull-right' t-att-data-cid='line.cid'
+                        t-on-click="() => this.updatePaymentReference(line)">                        
+                        <i class='fa fa-edit'> Reference</i>
+                    </span>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-name="payment_reference_on_pos.PaymentReferencePopup">
+        <div class="popup popup-textinput pos_popup_dialog">
+            <div class="modal-header title pos_title_dialog">
+                <h4 class="modal-title" style="padding: 10px !important">
+                    <t t-esc="props.title" />
+                </h4>
+            </div>
+            <div class="modal-body col-12">
+                <!-- Selección de bancos -->
+                <div class="attribute" style="display: flex; align-items: center;">
+                    <div style="margin-right: 10px;">
+                        Bancos
+                    </div>
+                    <select t-model="state.bankIdValue" class="form-control" required="required">
+                        <t t-foreach="props.bankIds" t-as="bank" t-key="bank.id">
+                            <option t-att-value="bank.id">
+                                <t t-esc="`${bank.name}`" />
+                            </option>
+                        </t>
+                    </select>
+                </div>
+                
+                <!-- Selección de cuotas -->
+                <div class="attribute" style="display: flex; align-items: center; margin-top: 10px;">
+                    <div style="margin-right: 10px;">
+                        Cuotas
+                    </div>
+                    <!-- Usar t-model para sincronizar correctamente el valor de la cuota seleccionada -->
+                    <select t-model="state.selectedQuote" class="form-control" required="required">
+                        <t t-foreach="props.quoteOptions" t-as="option" t-key="option.value">
+                            <option t-att-value="option.value">
+                                <t t-esc="option.label" />
+                            </option>
+                        </t>
+                    </select>
+                </div>
+
+                <!-- No. Autorización -->
+                <div class="attribute" style="display: flex; align-items: center; margin-top: 10px;">
+                    <div style="margin-right: 10px;">
+                        No. Autorización
+                    </div>
+                    <input type="text" t-model="state.authNumberValue" class="form-control" required="required"/>
+                </div>
+                
+                <!-- Observaciones (si es necesario) -->
+                <div class="attribute" style="display: flex; align-items: center; margin-top: 10px;">
+                    <textarea t-model="state.inputValue" t-ref="input" required="required"></textarea>
+                </div>
+            </div>
+
+            <!-- Footer con botones de acción -->
+            <footer class="footer footer-flex modal-footer">   
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="confirm">
+                    <t t-esc="props.confirmText" />
+                </div>
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="props.close">
+                    <t t-esc="props.cancelText" />
+                </div>
+            </footer>
+        </div>
+    </t>
+
+</templates>
+
+
+
+
+
+
+
+
+

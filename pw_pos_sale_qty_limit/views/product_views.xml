@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_category_form_view_inherit_pw_discount_limit" model="ir.ui.view">
+            <field name="name">product.category.inherit.pw.discount.limit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <group name="first" position="after">
+                    <group>
+                        <group name="pos_sale_limit" string="POS Sales Limit">
+                            <field name="pw_sale_limit"/>
+                            <field name="pw_max_qty" invisible="not pw_sale_limit"/>
+                        </group>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <record id="product_template_only_form_view_inherit_pw_discount_limit" model="ir.ui.view">
+            <field name="name">DiscountLimit Product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='to_weight']" position="after">
+                    <field name="pw_sale_limit"/>
+                    <field name="pw_max_qty" invisible="not pw_sale_limit"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pos_config_view_form_inherit_pwsale_limit" model="ir.ui.view">
+            <field name="name">res.config.setting.form.inherit.pw.sale.limit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@id='pos_interface_section']" position="inside">
+                    <setting help="Restrict to sale quantity more than limit">
+                        <field name="pw_restrict_sale_qty"/>
+                    </setting>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

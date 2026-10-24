@@ -1,0 +1,288 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_pos_multi_warehouse
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-10 03:26+0000\n"
+"PO-Revision-Date: 2024-07-09 21:31-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_GT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__Negative_selling
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_Negative_selling
+msgid "Allow POS Order When Product is Out of Stock"
+msgstr "Permitir pedido de POS cuando el producto está agotado"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_pos_config__display_stock
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_res_config_settings__pos_display_stock
+msgid "Allow display stock in pos."
+msgstr "Permitir visualización de Stock en pos."
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_pos_config__Ready_state
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_res_config_settings__pos_Ready_state
+msgid "Allow display stock in ready state pos."
+msgstr "Permitir mostrar stock en estado listo."
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_pos_config__Negative_selling
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_res_config_settings__pos_Negative_selling
+msgid "Allow negative selling in pos."
+msgstr "Permitir venta negativa en pos."
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/WarehouseStock.js:0
+#, python-format
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/xml/pos.xml:0
+#, python-format
+msgid "Available"
+msgstr "Disponible"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields.selection,name:bi_pos_multi_warehouse.selection__pos_config__stock_qty__qty_available
+msgid "Available Quantity"
+msgstr "Cantidad disponible"
+
+#. module: bi_pos_multi_warehouse
+#: model_terms:ir.ui.view,arch_db:bi_pos_multi_warehouse.custom_bi_pos_discount_form_view_inherit
+msgid "Available Warehouse In Pos"
+msgstr "Almacén Disponible En Pos"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__default_location_src_id
+msgid "Default Stock Location"
+msgstr "Ubicación de stock predeterminada"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_default_location_src_id
+msgid "Default tock Location"
+msgstr "Ubicación predeterminada del stock"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/models.js:0
+#, python-format
+msgid "Deny Order"
+msgstr "Denegar orden"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/models.js:0
+#, python-format
+msgid "Deny Order(name) is Out of Stock."
+msgstr "Denegar pedido (nombre) está agotado."
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__display_stock
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_display_stock
+msgid "Display stock in pos"
+msgstr "Mostrar stock en pos"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/xml/pos.xml:0
+#, python-format
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regla de inventario mínimo"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/models.js:0
+#, python-format
+msgid "Out of Stock"
+msgstr "Agotado"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__picking_id
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_picking_id
+msgid "Picking"
+msgstr "Picking"
+
+#. module: bi_pos_multi_warehouse
+#: model_terms:ir.ui.view,arch_db:bi_pos_multi_warehouse.inherit_view_pos_order_related_pickings
+msgid "Picking Ref."
+msgstr "Picking Ref."
+
+#. module: bi_pos_multi_warehouse
+#: model_terms:ir.ui.view,arch_db:bi_pos_multi_warehouse.inherit_view_pos_order_related_pickings
+msgid "Pickings"
+msgstr "Pickings"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/WarehouseStock.js:0
+#, python-format
+msgid "Please enter valid amount of quantity."
+msgstr "Por favor ingrese una cantidad válida de unidades."
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del punto de venta"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr "Líneas de orden del Punto de venta"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Órdenes del Punto de venta"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_pos_session
+msgid "Point of Sale Session"
+msgstr "Sesión del punto de venta"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_product_template
+msgid "Product"
+msgstr "Producto"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_product_product
+msgid "Product Variant"
+msgstr "Variante del producto"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/xml/pos.xml:0
+#, python-format
+msgid "Qty"
+msgstr ""
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_product_product__quant_text
+msgid "Quant Qty"
+msgstr ""
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/models.js:0
+#, python-format
+msgid "Quantity is not available"
+msgstr "La cantidad no está disponible"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_product_product__warehouse_quantity
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_product_template__warehouse_quantity
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_stock_quant__warehouse_quantity
+msgid "Quantity per warehouse"
+msgstr "Cantidad por almacén"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_stock_quant
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_product_product__quant_ids
+msgid "Quants"
+msgstr "Cantidad"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__Ready_state
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_Ready_state
+msgid "Set Picking In Ready State"
+msgstr "Establecer la recolección en estado listo"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_pos_config__warehouse_ids
+#: model:ir.model.fields,help:bi_pos_multi_warehouse.field_res_config_settings__pos_warehouse_ids
+msgid "Show the routes that apply on selected warehouses."
+msgstr "Mostrar las rutas que aplican en los almacenes seleccionados."
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__location_id
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_location_id
+msgid "Stock Location"
+msgstr "Ubicación de existencias"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__stock_qty
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_stock_qty
+msgid "Stock Type"
+msgstr "Tipo de acción"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model,name:bi_pos_multi_warehouse.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields.selection,name:bi_pos_multi_warehouse.selection__pos_config__stock_qty__virtual_available
+msgid "Unreserved Quantity"
+msgstr "Cantidad no reservada"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/xml/pos.xml:0
+#: model:ir.model,name:bi_pos_multi_warehouse.model_stock_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_order__stock_location_name
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_order_line__stock_location_name
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_stock_quant__warehouse_id
+#: model_terms:ir.ui.view,arch_db:bi_pos_multi_warehouse.custom_bi_pos_discount_form_view_inherit
+#, python-format
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_product_product__warehouse_id
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_product_template__warehouse_id
+msgid "Warehouse Name"
+msgstr "Nombre del almacén"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_stock_quant__quantity_warehouse
+msgid "Warehouse Qty"
+msgstr "Cantidad de almacén"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/xml/pos.xml:0
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_pos_config__warehouse_ids
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_res_config_settings__pos_warehouse_ids
+#, python-format
+msgid "Warehouses"
+msgstr "Almacenes"
+
+#. module: bi_pos_multi_warehouse
+#. odoo-javascript
+#: code:addons/bi_pos_multi_warehouse/static/src/js/WarehouseStock.js:0
+#, python-format
+msgid "cancel"
+msgstr "cancelar"
+
+#. module: bi_pos_multi_warehouse
+#: model_terms:ir.ui.view,arch_db:bi_pos_multi_warehouse.custom_bi_pos_discount_form_view_inherit
+msgid "check this to display stock in pos screen"
+msgstr "marque esto para mostrar el stock en la pantalla pos"
+
+#. module: bi_pos_multi_warehouse
+#: model:ir.model.fields,field_description:bi_pos_multi_warehouse.field_stock_warehouse__quantity
+msgid "quantity"
+msgstr "cantidad"

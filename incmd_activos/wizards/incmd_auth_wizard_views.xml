@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_incmd_activo_auth_wizard_form" model="ir.ui.view">
+        <field name="name">incmd.activo.auth.wizard.form</field>
+        <field name="model">incmd.activo.auth.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Autorización">
+                <group>
+                    <field name="activo_id" readonly="1"/>
+                    <field name="action_type" readonly="1"/>
+                    <field name="login"/>
+                    <field name="password" password="True"/>
+                    <field name="observation" invisible="action_type != 'archive'" required="action_type == 'archive'" placeholder="Ingrese el motivo u observación de la baja"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Finalizar" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

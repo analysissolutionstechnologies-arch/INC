@@ -1,0 +1,19 @@
+<odoo>
+    <record id="view_sale_order_form_inherit_cantidad_disponible" model="ir.ui.view">
+        <field name="name">sale.order.form.cantidad_disponible</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='qty_to_invoice']" position="after">
+                <field name="cantidad_disponible" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+
+
+
+
+
+

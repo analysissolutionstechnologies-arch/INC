@@ -1,0 +1,65 @@
+<odoo>
+ <record id="sale_attachment_upload_form" model="ir.ui.view">
+  <field name="name">sale.attachment.upload.b2</field>
+  <field name="model">ir.attachment</field>
+  <field name="priority">1000</field>
+  <field name="arch" type="xml">
+   <form string="Cargar documento">
+    <sheet>
+     <h2>Documento del pedido</h2>
+     <p class="text-muted">Selecciona el archivo y revisa su vista previa antes de guardar.</p>
+     <field name="name" invisible="1"/>
+     <field name="write_date" invisible="1"/>
+     <field name="type" invisible="1"/>
+     <field name="res_model" invisible="1"/>
+     <field name="res_id" invisible="1"/>
+     <field name="datas" widget="b2_document_preview" filename="name"/>
+     <p class="text-muted mt-3">Formatos permitidos: JPG, JPEG, PNG, PDF, ODT, DOCX y XLSX.</p>
+     <group string="Almacenamiento" groups="base.group_system">
+      <field name="b2_location" widget="badge" readonly="1"/>
+      <field name="b2_repository_id" readonly="1"/>
+     </group>
+    </sheet>
+   </form>
+  </field>
+ </record>
+ <record id="cron_b2_link_sale_documents" model="ir.cron">
+  <field name="name">Backblaze: vincular documentos de pedidos</field>
+  <field name="model_id" ref="sale.model_sale_order"/>
+  <field name="state">code</field>
+  <field name="code">model._b2_repair_sale_documents()</field>
+  <field name="interval_number">15</field>
+  <field name="interval_type">minutes</field>
+  <field name="numbercall">-1</field>
+  <field name="user_id" ref="base.user_root"/>
+ </record>
+<function model="ir.attachment" name="_b2_configure_studio_sale_action"/>
+
+ <record id="sale_document_gallery" model="ir.ui.view">
+  <field name="name">sale.document.b2.gallery</field>
+  <field name="model">ir.attachment</field>
+  <field name="arch" type="xml"><kanban default_order="id desc" create="false" edit="false" delete="false" quick_create="false">
+ <field name="id"/><field name="name"/><field name="mimetype"/><field name="write_date"/>
+ <templates><t t-name="kanban-box">
+  <div class="oe_kanban_card oe_kanban_global_click">
+   <div class="text-center mb-2" style="height:150px">
+    <img t-if="record.mimetype.raw_value &amp;&amp; record.mimetype.raw_value.startsWith('image/')" t-att-src="'/web/image/ir.attachment/' + record.id.raw_value + '/datas?width=256&amp;height=256&amp;unique=' + encodeURIComponent(record.write_date.raw_value || '')" alt="Imagen cargada" loading="lazy" style="width:100%;height:150px;object-fit:contain"/>
+    <i t-else="" class="fa fa-file-o text-muted" title="Documento" aria-label="Documento" style="font-size:72px;margin-top:30px"/>
+   </div>
+   <div class="text-break fw-bold"><field name="name"/></div>
+   <div class="text-muted mt-1">Abrir documento</div>
+  </div>
+ </t></templates>
+</kanban></field>
+ </record>
+ <record id="sale_document_list" model="ir.ui.view">
+  <field name="name">sale.document.b2.list</field>
+  <field name="model">ir.attachment</field>
+  <field name="arch" type="xml">
+   <tree create="false" edit="false" delete="false" default_order="id desc">
+    <field name="name"/><field name="mimetype"/><field name="file_size"/>
+    <field name="create_date"/><field name="create_uid"/>
+   </tree>
+  </field>
+ </record>
+ </odoo>

@@ -1,0 +1,22 @@
+.pos-temporary-message {
+    position: fixed;
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste para centrar completamente */
+    background-color: rgba(255, 69, 0, 0.9); /* Fondo más oscuro */
+    color: white; /* Texto en blanco */
+    padding: 20px 40px; /* Aumenta el tamaño del padding */
+    border-radius: 10px; /* Bordes más redondeados */
+    font-size: 18px; /* Texto más grande */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrar texto */
+    z-index: 1000; /* Asegura que esté al frente */
+    animation: fadeInOut 3s ease-in-out; /* Animación suave */
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}

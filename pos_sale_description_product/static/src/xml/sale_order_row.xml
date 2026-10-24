@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="SaleOrderRow" t-inherit="pos_sale.SaleOrderRow" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('order-row')]" position="inside">
+            <div class="col state p-2">
+                <div t-if="ui.isSmall">Description</div>
+                <div><t t-esc="line_names"/></div>
+            </div>
+        </xpath>
+    </t>
+</templates>

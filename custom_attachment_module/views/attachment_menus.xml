@@ -1,0 +1,4 @@
+<odoo>
+<menuitem id="menu_backblaze_attachment_root" name="Backblaze Attachments" web_icon="backblaze_attachment,static/description/icon.png" groups="custom_attachment_module.group_custom_attachment_admin" sequence="10"/>
+<menuitem id="menu_backblaze_attachment_list" name="Attachments" parent="menu_backblaze_attachment_root" action="action_backblaze_attachment_list" groups="custom_attachment_module.group_custom_attachment_admin" sequence="10"/>
+</odoo>

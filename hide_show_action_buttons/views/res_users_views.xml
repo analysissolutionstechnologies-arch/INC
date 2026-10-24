@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <record id="view_users_form_inherit" model="ir.ui.view">
+            <field name="name">view.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='access_rights']" position="after">
+                    <page string="Hide Action Buttons" groups="base.group_system">
+                        <group>
+                            <group string="Hide Export">
+                                <field name="hide_all_export"/>
+                                <field name="hide_export_model_ids" widget="many2many_tags"
+                                       invisible="hide_all_export"/>
+                            </group>
+                            <group string="Hide Archive">
+                                <field name="hide_all_archive"/>
+                                <field name="hide_archive_model_ids" widget="many2many_tags"
+                                       invisible="hide_all_archive"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Hide Create">
+                                <field name="hide_all_create"/>
+                                <field name="hide_create_model_ids" widget="many2many_tags"
+                                       invisible="hide_all_create"/>
+                            </group>
+                            <group string="Hide Duplicate">
+                                <field name="hide_all_duplicate"/>
+                                <field name="hide_duplicate_model_ids" widget="many2many_tags"
+                                        invisible="hide_all_duplicate"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Hide Edit">
+                                <field name="hide_all_edit"/>
+                                <field name="hide_edit_model_ids" widget="many2many_tags"
+                                        invisible="hide_all_edit"/>
+                            </group>
+                            <group string="Hide Delete">
+                                <field name="hide_all_delete"/>
+                                <field name="hide_delete_model_ids" widget="many2many_tags"
+                                        invisible="hide_all_delete"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Hide Print">
+                                <field name="hide_all_print"/>
+                                <field name="hide_print_model_ids" widget="many2many_tags"
+                                       invisible="hide_all_print"/>
+                            </group>
+                            <group string="Hide Import">
+                                <field name="hide_all_import"/>
+                                <field name="hide_import_model_ids" widget="many2many_tags"
+                                        invisible="hide_all_import"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

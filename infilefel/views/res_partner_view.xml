@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="infilefel_view_res_partner_form">
+            <field name="name">infilefel.view.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="documento_personal_identificacion"/>
+                    <field name="pasaporte"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

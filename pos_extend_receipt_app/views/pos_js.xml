@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="pos_config_view_inherit_form" model="ir.ui.view">
+		<field name="name">res.config.setting.form.extended.view</field>
+        <field name="model">res.config.settings</field>
+		<field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//block[@id='pos_interface_section']" position='before'>
+				<block title="POS Receipt Extended" id="pos_credit_card">
+					<setting id="order_barcode" string="Order Barcode."
+							 help="Enable to show Barcode in Receipt.">
+						<field name="order_barcode"/>
+						<div class="mt8">
+							<field name="barcode_selection" widget="radio" invisible="not order_barcode"/>
+						</div>
+					</setting>
+					<setting id="invoice_number" string="Invoice Number"
+							 help="Enable View Invoice Number in Receipt.">
+						<field name="invoice_number"/>
+					</setting>
+					<setting id="customer_details" string="Customer Details"
+							 help="Enable to view Customer details in Receipt.">
+						<field name="customer_details"/>
+						<div class="content-group mt16" style="display: flex;">
+							<div style="display: grid;min-width: 300px;"  invisible="not customer_details">
+								<label for="customer_name"/>
+								<label for="customer_address"/>
+								<label for="customer_mobile"/>
+								<label for="customer_phone"/>
+								<label for="customer_email"/>
+								<label for="order_number"/>
+								<label for="customer_vat"/>
+							</div>
+							<div style="display: grid;min-width: 125px;" invisible="not customer_details">
+								<field name="customer_name" required="customer_details"/>
+								<field name="customer_address" required="customer_details"/>
+								<field name="customer_mobile" required="customer_details"/>
+								<field name="customer_phone" required="customer_details"/>
+								<field name="customer_email" required="customer_details"/>
+								<field name="order_number" required="customer_details"/>
+								<field name="customer_vat" required="customer_details"/>
+							</div>
+						</div>
+					</setting>
+				</block>
+			</xpath>
+		</field>
+	</record>
+</odoo>

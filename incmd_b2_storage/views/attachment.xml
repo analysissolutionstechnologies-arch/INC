@@ -1,0 +1,29 @@
+<odoo>
+<record id="attachment_storage_list" model="ir.ui.view">
+ <field name="name">ir.attachment.b2.storage.list</field><field name="model">ir.attachment</field>
+ <field name="inherit_id" ref="base.view_attachment_tree"/>
+ <field name="arch" type="xml"><xpath expr="//tree/field[@name='name']" position="after">
+  <field name="b2_location" groups="base.group_system" widget="badge" optional="show" decoration-info="b2_location == 'cloud'" decoration-warning="b2_location == 'pending'"/>
+  <field name="b2_local_copy" groups="base.group_system" optional="hide"/><field name="b2_local_bytes" groups="base.group_system" optional="hide"/>
+  <field name="b2_repository_id" groups="base.group_system" string="Repositorio" optional="hide"/>
+ </xpath></field>
+</record>
+<record id="attachment_storage_form" model="ir.ui.view">
+ <field name="name">ir.attachment.b2.storage.form</field><field name="model">ir.attachment</field>
+ <field name="inherit_id" ref="base.view_attachment_form"/>
+ <field name="arch" type="xml"><xpath expr="//sheet" position="inside">
+ <group string="Almacenamiento" groups="base.group_system"><field name="b2_location" widget="badge"/>
+ <field name="b2_repository_id" string="Repositorio" readonly="1"/>
+ <field name="b2_thumbnail_key"/><field name="b2_thumbnail_attempts"/><field name="b2_thumbnail_next_try"/><field name="b2_thumbnail_error"/><field name="b2_rule_id"/><field name="b2_attempts"/><field name="b2_next_try"/><field name="b2_remote_key"/><field name="store_fname" readonly="1" string="Referencia permanente"/>
+ <field name="b2_local_copy"/><field name="b2_local_bytes"/>
+ </group></xpath></field>
+</record>
+<record id="attachment_storage_search" model="ir.ui.view">
+ <field name="name">ir.attachment.b2.storage.search</field><field name="model">ir.attachment</field>
+ <field name="inherit_id" ref="base.view_attachment_search"/>
+ <field name="arch" type="xml"><xpath expr="//search" position="inside">
+ <separator/><filter groups="base.group_system" name="b2_cloud" string="☁️ Backblaze" domain="[('b2_location','=','cloud')]"/>
+ <filter groups="base.group_system" name="b2_local" string="💾 Local" domain="[('b2_location','=','local')]"/>
+ <filter groups="base.group_system" name="b2_pending" string="⏳ Pendiente" domain="[('b2_location','=','pending')]"/>
+ </xpath></field>
+</record></odoo>

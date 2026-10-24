@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Heredamos la vista del wizard que muestra "Motivo" y el botón "Update Quantities" -->
+    <record id="view_adjustment_name_add_type" model="ir.ui.view">
+        <field name="name">stock.inventory.adjustment.name.add.type</field>
+        <field name="model">stock.inventory.adjustment.name</field>
+        <field name="inherit_id" ref="stock.stock_inventory_adjustment_name_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Insertamos el nuevo campo justo después del campo inventory_adjustment_name (Motivo) -->
+            <xpath expr="//field[@name='inventory_adjustment_name']" position="after">
+                <field name="ajuste_tipo"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

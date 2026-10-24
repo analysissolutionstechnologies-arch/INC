@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_ticket_document_unified_lines" inherit_id="infilefel.reporte_ticket">
+        <xpath expr="//t[@t-foreach='o.invoice_line_ids' and @t-as='linea']" position="replace">
+            <t t-if="not o.invoice_line_ids.filtered(lambda l: l.product_id.x_studio_es_moto_1)">
+                <t t-foreach="o.invoice_line_ids" t-as="linea">
+                    <tr>
+                        <td style="border-top: 1px solid black;"><span t-field="linea.quantity"/></td>
+                        <td style="border-top: 1px solid black;"><span t-field="linea.name"/></td>
+                        <td style="border-top: 1px solid black;"><span t-field="linea.price_unit"/></td>
+                        <td style="border-top: 1px solid black;"><span t-field="linea.price_total"/></td>
+                    </tr>
+                </t>
+            </t>
+            <t t-else="">
+                <t t-set="lines_custom" t-value="o.get_lines_for_report()"/>
+                <t t-foreach="lines_custom" t-as="linea">
+                    <tr>
+                        <td style="border-top: 1px solid black;"><span t-out="linea['quantity']"/></td>
+                        <td style="border-top: 1px solid black;"><span t-out="linea['name']"/></td>
+                        <td style="border-top: 1px solid black;">
+                            <span t-out="linea['price_unit']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                        </td>
+                        <td style="border-top: 1px solid black;">
+                            <span t-out="linea.get('total', linea.get('price', 0.0))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

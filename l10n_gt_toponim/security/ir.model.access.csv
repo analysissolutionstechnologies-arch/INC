@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_municipiogt,access_res_municipiogt,model_res_municipiogt,base.group_user,1,1,1,0
+access_res_zonagt,access_res_zonagt,model_res_zonagt,base.group_user,1,1,1,0
+access_res_coloniagt,access_res_coloniagt,model_res_coloniagt,base.group_user,1,1,1,0

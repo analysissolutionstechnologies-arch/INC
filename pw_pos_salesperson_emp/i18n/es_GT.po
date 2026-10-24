@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pw_pos_salesperson_emp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-10 04:09+0000\n"
+"PO-Revision-Date: 2024-07-09 22:11-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_GT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: pw_pos_salesperson_emp
+#. odoo-javascript
+#: code:addons/pw_pos_salesperson_emp/static/src/input_popups/salesperson_popup.js:0
+#, python-format
+msgid "Add"
+msgstr "Agregar"
+
+#. module: pw_pos_salesperson_emp
+#: model:ir.model.fields,field_description:pw_pos_salesperson_emp.field_pos_config__allow_salesperson
+#: model:ir.model.fields,field_description:pw_pos_salesperson_emp.field_res_config_settings__allow_salesperson
+msgid "Allow Salesperson"
+msgstr "Permitir vendedor"
+
+#. module: pw_pos_salesperson_emp
+#: model:ir.model,name:pw_pos_salesperson_emp.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: pw_pos_salesperson_emp
+#. odoo-javascript
+#: code:addons/pw_pos_salesperson_emp/static/src/input_popups/salesperson_popup.js:0
+#, python-format
+msgid "Discard"
+msgstr "Descartar"
+
+#. module: pw_pos_salesperson_emp
+#: model:ir.model,name:pw_pos_salesperson_emp.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del punto de venta"
+
+#. module: pw_pos_salesperson_emp
+#: model:ir.model,name:pw_pos_salesperson_emp.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr "Líneas de orden del Punto de venta"
+
+#. module: pw_pos_salesperson_emp
+#: model:ir.model,name:pw_pos_salesperson_emp.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Órdenes del Punto de venta"
+
+#. module: pw_pos_salesperson_emp
+#: model:ir.model,name:pw_pos_salesperson_emp.model_report_pos_order
+msgid "Point of Sale Orders Report"
+msgstr "Reporte de órdenes del Punto de venta"
+
+#. module: pw_pos_salesperson_emp
+#: model_terms:ir.ui.view,arch_db:pw_pos_salesperson_emp.view_pos_pos_form_inherit_pos_salesperson
+msgid "Saleperson"
+msgstr "Vendedor"
+
+#. module: pw_pos_salesperson_emp
+#. odoo-javascript
+#: code:addons/pw_pos_salesperson_emp/static/src/xml/pos.xml:0
+#: model:ir.model.fields,field_description:pw_pos_salesperson_emp.field_pos_order_line__user_id
+#: model:ir.model.fields,field_description:pw_pos_salesperson_emp.field_report_pos_order__saleperson_id
+#, python-format
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: pw_pos_salesperson_emp
+#. odoo-javascript
+#: code:addons/pw_pos_salesperson_emp/static/src/xml/pos.xml:0
+#, python-format
+msgid "Salesperson:"
+msgstr "Vendedor:"
+
+#. module: pw_pos_salesperson_emp
+#. odoo-javascript
+#: code:addons/pw_pos_salesperson_emp/static/src/input_popups/salesperson_popup.js:0
+#, python-format
+msgid "Select"
+msgstr "Seleccionar"
+
+#. module: pw_pos_salesperson_emp
+#. odoo-javascript
+#: code:addons/pw_pos_salesperson_emp/static/src/js/SalespersonButton.js:0
+#: code:addons/pw_pos_salesperson_emp/static/src/js/product_screen.js:0
+#, python-format
+msgid "Select Salesperson"
+msgstr "Seleccionar vendedor"
+
+#. module: pw_pos_salesperson_emp
+#: model_terms:ir.ui.view,arch_db:pw_pos_salesperson_emp.pos_config_view_form_inherit_pos_salesperson_emp
+msgid "Set salesperson on pos orderline"
+msgstr "Establecer vendedor en línea de pedido pos"

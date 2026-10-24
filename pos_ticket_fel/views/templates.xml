@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets" inherit_id="point_of_sale.ticket_validation_screen">        
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pos_ticket_fel/static/src/js/qrcode.js"></script>
+            <script type="text/javascript" src="/pos_ticket_fel/static/src/js/Screens/ReceiptScreen/OrderReceipt.js"></script>
+        </xpath>
+    </template>
+
+</odoo>

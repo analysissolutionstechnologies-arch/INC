@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_repository,access_repository,model_incmd_b2_repository,base.group_system,1,1,1,0
+access_rule,access_rule,model_incmd_b2_rule,base.group_system,1,1,1,0
+access_audit,access_audit,model_incmd_b2_audit,base.group_system,1,0,0,0
+
+access_document_type,access_document_type,model_incmd_b2_document_type,base.group_system,1,1,1,0

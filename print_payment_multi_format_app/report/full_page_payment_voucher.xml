@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="internal_layout_inh" inherit_id="web.internal_layout" primary="True">
+		<xpath expr="//div[hasclass('header')]" position="replace"/>
+	</template>
+
+
+	<template id="full_page_payment_voucher_template">
+	<t t-call="web.html_container">
+		<t t-call="print_payment_multi_format_app.internal_layout_inh">
+			<div class="page" style=" min-width:100%">
+				<div style="font-weight: bold;">
+					<div style="margin-bottom: 60px; display: flex; width: 100%; justify-content: center;">
+						<div style="display: flex; width: 100%; justify-content: space-around; margin-top: 2.5cm;">
+							<div style="display: flex; flex-direction: column;">
+								<div style="display: flex;">
+									<div><span style="margin-left: 2.5cm; font-weight: bold;" t-esc="doc.company_id.country_id.name"/>,<span style="font-weight: bold;" t-esc="doc.date"/></div>
+									<div style="margin-left: 13.5cm; "><span style="font-weight: bold;" t-esc="sum(line.debit for line in doc.move_id.line_ids)"/></div>
+								</div>
+								<div><span style="margin-left: 2.2cm; font-weight: bold;" t-esc="doc.partner_id.name"/></div>
+								<div><span style="margin-left: 2.2cm; font-weight: bold;" t-esc="doc.check_amount_in_words"/></div>
+							</div>
+						</div>
+						
+					</div>
+					<!-- <div style="margin-bottom: 60px; display: flex; width: 100%; justify-content: center;">
+						<div style="display: flex; width: 100%; justify-content: space-around; margin-top: 2.5cm;">
+							<div style="display: flex; flex-direction: column;">
+								<div><span style="margin-left: 2.5cm; font-weight: bold;" t-esc="doc.company_id.country_id.name"/>,<span style="font-weight: bold;" t-esc="doc.date"/></div>
+								<div><span style="margin-left: 2.2cm; font-weight: bold;" t-esc="doc.partner_id.name"/></div>
+								<div><span style="margin-left: 2.2cm; font-weight: bold;" t-esc="doc.check_amount_in_words"/></div>
+							</div>
+							<div style="margin-left: 13.5cm; "><span style="font-weight: bold;" t-esc="sum(line.debit for line in doc.move_id.line_ids)"/></div>
+						</div>
+					</div> -->
+					<div>
+						<div style="display: flex; justify-content: center; margin-bottom: 40px"><h4>NO NEGOCIABLE</h4></div>
+					</div>
+					<table class="table table-borderless">
+						<thead>
+							<th>NO. CUENTA</th>
+							<th>NOMBRE CUENTA</th>
+							<th>DEBE</th>
+							<th>HABER</th>
+						</thead>
+						<tbody>
+							<t t-foreach="doc.move_id.line_ids" t-as="line">
+								<tr>
+									<td><span style="font-weight: bold;" t-esc="line.account_id.code"/></td>
+									<td><span style="font-weight: bold;" t-esc="line.account_id.name"/></td>
+									<td><span style="font-weight: bold;" t-esc="line.debit"/></td>
+									<td><span style="font-weight: bold;" t-esc="line.credit"/></td>
+								</tr>
+							</t>
+							<tr>
+								<td></td>
+								<td>TOTALES</td>
+								<td><span style="font-weight: bold;" t-esc="sum(line.debit for line in doc.move_id.line_ids)"/></td>
+								<td><span style="font-weight: bold;" t-esc="sum(line.credit for line in doc.move_id.line_ids)"/></td>
+							</tr>
+						</tbody>
+					</table>
+					<div style="margin-top: 20px">
+						<div>CHEQUE NO.:</div>
+						<div>CONCEPTO: <span style="font-weight: bold;" t-esc="doc.descripcion"/></div>
+					</div>
+	
+					<div style="display: flex; justify-content: space-between; border-top: solid 1px black; margin-top: 80px">
+						<br/>
+						<div>HECHO POR:</div><br/>
+						<div>RECIBI:</div><br/>
+						<div>DPI:</div><br/>
+						<div>FIRMA:</div><br/>
+					</div>
+				</div>
+				
+			</div>
+		</t>
+	</t>
+	</template>
+
+	<template id="full_page_payment_report">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="print_payment_multi_format_app.full_page_payment_voucher_template"/>
+			</t>
+		</t>
+	</template>
+
+	<record id="full_page_payment_report_paperformat" model="report.paperformat">
+		<field name="name">Full Page Payment Voucher</field>
+		<field name="default" eval="True" />
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="margin_top">40</field>
+		<field name="margin_bottom">20</field>
+		<field name="margin_left">10</field>
+		<field name="margin_right">10</field>
+		<field name="header_line" eval="False" />
+		<field name="orientation">Portrait</field>
+		<field name="header_spacing">35</field>
+		<field name="dpi">80</field>
+	</record>
+
+    <record id="full_page_payment_report_action" model="ir.actions.report">
+        <field name="name">Full Page Payment Voucher</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">print_payment_multi_format_app.full_page_payment_report</field>
+        <field name="report_file">print_payment_multi_format_app.full_page_payment_report</field>
+        <field name="paperformat_id" ref="full_page_payment_report_paperformat"/>
+        <field name="binding_model_id" ref="account.model_account_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="select_pricelist_disabled.PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension">
+        <xpath expr="//select[@id='pricelist']" position="replace">
+            <select class="detail form-select" id="pricelist" name="property_product_pricelist" t-model="changes.property_product_pricelist" disabled="disabled" t-att-class="{'border-danger': missingFields.includes('property_product_pricelist')}">
+                <t t-foreach="pos.pricelists" t-as="pricelist" t-key="pricelist.id">
+                    <option t-att-value="pricelist.id" t-att-selected="props.partner.property_product_pricelist ? (pricelist.id === props.partner.property_product_pricelist[0] ? true : undefined) : pricelist.id === pos.default_pricelist?.id ? true : undefined">
+                        <t t-esc="pricelist.display_name" />
+                    </option>
+                </t>
+            </select>
+        </xpath>
+    </t>
+</templates>

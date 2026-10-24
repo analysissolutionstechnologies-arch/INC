@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="view_order_agent_form_inherit_netfinance" model="ir.ui.view">
+        <field name="name">sale.agent.order.inherit.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+              
+        <!-- <xpath expr="//notebook" position="inside"> -->
+        <xpath expr="//notebook/page[1]" position="before">
+
+        <!-- <xpath expr="//page[@name='order_lines" position="before"> -->
+            <page string="NetFinance Conexion" name="netfinance">
+                <group name="netfinance">
+                    <field name="char_autorization_netfinance" />
+                    <!-- <field name="char_cliente_dpi"  /> -->
+                    
+                    <field name="check_autorization_netfinance" readonly="1"  invisible="1" />
+
+                    <!-- <field name="respuesta_cliente_netfinance"  /> -->
+                    <field name="respuesta_autorizacion_netfinance" readonly="1" />
+                    <!-- <field name="respuesta_cuota_netfinance"  /> -->
+                    <field name="Agencia_autorizada"  readonly="1"  />
+                    <field name="Agencia_BDA"  readonly="1"  />
+                    <field name="char_cliente_dpi"  string="DPI Relacionado" />
+                    <field name="DpiCliente_autorizado"  readonly="1" />
+                    <field name="articulo_autorizado" readonly="1"  />
+                    <field name="Factura_monto_autorizado" readonly="1"  />
+                    <field name="Pagare_monto_autorizado"  readonly="1"  />
+                    <field name="IdPersona_autorizada"  readonly="1"  invisible="1"  />
+                    <field name="Plazo"   readonly="1"  />
+                    <field name="cuota_autorizada"  readonly="1"  />
+                    <field name="enganche_autorizado"  readonly="1"  />
+                    <field name="monto_plus_autorizado"  readonly="1"  />
+<!--                    <field name="monto_plus_manual"  readonly="0"  /> -->
+                    <field name="poe_autorizado" readonly="1" />
+                    <field name="articulo_autorizado"  readonly="1"  />
+                    <field name="lista_articulos"  widget="text" readonly="1"  />
+                    <field name="TipoFlujo"   readonly="1"  />
+                    
+                    <field name="check_autorization_netfinance" invisible="1" />
+                    <field name="validar_dpi"  />
+                    <field name="validar_articulos"  />
+                    <field name="check_monto_poe"  />
+                    <field name="diff_montos"  />
+                    <field name="check_monto_factura"  />
+                    <field name="validar_agencia"  />
+<!--                    <field name="validar_monto_plus"  /> -->
+                    <field name="validar_autorizaion"  />
+
+ 
+                </group>
+                <group name="netfinance_button">
+                    <button name="get_autorization_netfinance" string="Verificar Autorizacion" type="object" class="btn-primary"/>
+                    <button name="get_autorization_cliente_netfinance" string="Actualizar Cliente" type="object" />
+                    <!-- <button name="get_autorization_cuotas_netfinance" string="Traer Cuotas" type="object" class="btn-primary"/> -->
+
+                </group>
+
+
+            </page>
+        </xpath>
+        </field>
+    </record>
+</odoo>

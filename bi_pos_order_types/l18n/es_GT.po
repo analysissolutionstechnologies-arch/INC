@@ -1,0 +1,147 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_pos_order_types
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-10 04:32+0000\n"
+"PO-Revision-Date: 2024-09-09 22:34-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. module: bi_pos_order_types
+#: model:ir.model,name:bi_pos_order_types.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: bi_pos_order_types
+#. odoo-javascript
+#: code:addons/bi_pos_order_types/static/src/xml/pos_order_type.xml:0
+#, python-format
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: bi_pos_order_types
+#. odoo-javascript
+#: code:addons/bi_pos_order_types/static/src/js/pos_order_type.js:0
+#, python-format
+msgid "Empty Order"
+msgstr "Orden vacía"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_config__enable_order_type
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_res_config_settings__enable_order_type
+#: model_terms:ir.ui.view,arch_db:bi_pos_order_types.pos_config_settings_item_count
+msgid "Enable Type of POS order"
+msgstr "Habilitar tipo de pedido POS"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__id
+msgid "ID"
+msgstr ""
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order_type__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: bi_pos_order_types
+#: model:ir.model,name:bi_pos_order_types.model_pos_order_type
+msgid "POS Order Types"
+msgstr "Tipos de pedidos POS"
+
+#. module: bi_pos_order_types
+#: model:ir.model,name:bi_pos_order_types.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del punto de venta"
+
+#. module: bi_pos_order_types
+#: model:ir.model,name:bi_pos_order_types.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Órdenes del punto de venta"
+
+#. module: bi_pos_order_types
+#: model:ir.model,name:bi_pos_order_types.model_pos_session
+msgid "Point of Sale Session"
+msgstr "Sesión de punto de venta"
+
+#. module: bi_pos_order_types
+#: model:ir.actions.act_window,name:bi_pos_order_types.action_pos_order_type
+msgid "Pos Type of POS order"
+msgstr "Pos Tipo de pedido POS"
+
+#. module: bi_pos_order_types
+#. odoo-javascript
+#: code:addons/bi_pos_order_types/static/src/js/pos_order_type.js:0
+#, python-format
+msgid "Select Types of POS order"
+msgstr "Seleccione Tipos de pedido POS"
+
+#. module: bi_pos_order_types
+#. odoo-javascript
+#: code:addons/bi_pos_order_types/static/src/js/pos_order_type.js:0
+#, python-format
+msgid "There must be at least one product in your order before applying order type."
+msgstr "Debe haber al menos un producto en su pedido antes de aplicar el tipo de pedido."
+
+#. module: bi_pos_order_types
+#. odoo-javascript
+#: code:addons/bi_pos_order_types/static/src/xml/pos_order_type.xml:0
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_config__order_type_ids
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_res_config_settings__order_type_ids
+#: model_terms:ir.ui.view,arch_db:bi_pos_order_types.pos_config_settings_item_count
+#: model_terms:ir.ui.view,arch_db:bi_pos_order_types.pos_order_type_form_view
+#: model_terms:ir.ui.view,arch_db:bi_pos_order_types.pos_order_type_tree_view
+#, python-format
+msgid "Type of POS order"
+msgstr "Tipo de pedido PdV"
+
+#. module: bi_pos_order_types
+#: model:ir.model.fields,field_description:bi_pos_order_types.field_pos_order__order_type_id
+msgid "Type of POS order "
+msgstr "Tipo de pedido PdV "
+
+#. module: bi_pos_order_types
+#. odoo-javascript
+#: code:addons/bi_pos_order_types/static/src/xml/OrderTypePopup.xml:0
+#, python-format
+msgid "Type of POS order :"
+msgstr "Tipo de pedido PdV :"
+
+#. module: bi_pos_order_types
+#: model:ir.ui.menu,name:bi_pos_order_types.menu_pos_copan_setting
+msgid "Types of POS order"
+msgstr "Tipos de pedido POS"

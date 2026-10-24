@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pw_pos_change_logo.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//img[hasclass('pos-logo')]" position="replace">
+            <t t-if="pos.config.pw_change_logo">
+                <img class="pos-logo h-75 ms-3 me-auto align-self-center" t-on-click="() => debug.toggleWidget()" t-att-src="imageUrl" alt="Logo" />
+            </t>
+            <t t-else="">
+                <img class="pos-logo h-75 ms-3 me-auto align-self-center" t-on-click="() => debug.toggleWidget()" src="/web/static/img/logo.png" alt="Logo" />
+            </t>
+        </xpath>
+    </t>
+    <t t-name="pw_pos_change_logo.ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
+        <xpath expr="//img[hasclass('pos-receipt-logo')]" position="replace">
+            <t t-if="props.data.pw_change_logo">
+                <img t-attf-src="/web/image?model=pos.config&amp;id={{props.data.config_id}}&amp;field=pw_pos_logo" alt="Logo" class="pos-receipt-logo"/>
+            </t>
+            <t t-else="">
+                <img t-attf-src="/web/image?model=res.company&amp;id={{props.data.company.id}}&amp;field=logo" alt="Logo" class="pos-receipt-logo"/>
+            </t>
+        </xpath>
+    </t>
+</templates>

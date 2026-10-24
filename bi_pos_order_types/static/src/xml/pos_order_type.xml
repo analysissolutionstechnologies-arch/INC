@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t owl="1" t-name="bi_pos_order_types.CustomOrderTypeButtons">
+        <div class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onClick()">
+            <t t-if="!env.isMobile">
+                <i class="fa fa-truck" role="img" aria-label="Customer" title="Type of POS order" />
+            </t>
+            <t t-if="pos.get_order().get_order_type().length &gt; 0">
+                <span> </span>
+                <span><t t-esc="pos.get_order().get_order_type()" /></span>
+            </t>
+            <t t-else="">
+                Tipo de Pedido
+            </t>
+        </div>
+   </t>
+</templates>
+
+

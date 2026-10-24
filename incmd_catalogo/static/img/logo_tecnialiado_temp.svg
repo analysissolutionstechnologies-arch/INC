@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" width="280" height="80">
+  <!-- Fondo con bordes redondeados -->
+  <rect width="280" height="80" rx="10" ry="10" fill="#1a1a2e"/>
+  
+  <!-- Acento verde izquierdo -->
+  <rect x="0" y="0" width="6" height="80" rx="3" ry="3" fill="#7dc400"/>
+  
+  <!-- Ícono: engrane / herramienta estilizada -->
+  <g transform="translate(22, 15)">
+    <!-- Círculo exterior del engrane -->
+    <circle cx="25" cy="25" r="22" fill="none" stroke="#7dc400" stroke-width="3"/>
+    <!-- Círculo interior -->
+    <circle cx="25" cy="25" r="10" fill="#7dc400"/>
+    <!-- Dientes del engrane -->
+    <rect x="21" y="0" width="8" height="10" rx="2" fill="#7dc400"/>
+    <rect x="21" y="40" width="8" height="10" rx="2" fill="#7dc400"/>
+    <rect x="0" y="21" width="10" height="8" rx="2" fill="#7dc400"/>
+    <rect x="40" y="21" width="10" height="8" rx="2" fill="#7dc400"/>
+    <!-- Dientes diagonales -->
+    <rect x="4" y="4" width="8" height="10" rx="2" fill="#7dc400" transform="rotate(45, 8, 9)"/>
+    <rect x="36" y="4" width="8" height="10" rx="2" fill="#7dc400" transform="rotate(-45, 40, 9)"/>
+    <rect x="4" y="36" width="8" height="10" rx="2" fill="#7dc400" transform="rotate(-45, 8, 41)"/>
+    <rect x="36" y="36" width="8" height="10" rx="2" fill="#7dc400" transform="rotate(45, 40, 41)"/>
+    <!-- Punto central blanco -->
+    <circle cx="25" cy="25" r="5" fill="#fff"/>
+  </g>
+  
+  <!-- Texto TECNI en blanco -->
+  <text x="82" y="38" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="22" font-weight="900" fill="#ffffff" letter-spacing="1">TECNI</text>
+  <!-- Texto ALIADO en verde -->
+  <text x="82" y="62" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="22" font-weight="900" fill="#7dc400" letter-spacing="1">ALIADO</text>
+  
+  <!-- Línea separadora vertical entre las dos palabras -->
+  <line x1="78" y1="18" x2="78" y2="68" stroke="#7dc400" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Texto pequeño "LOGO TEMPORAL" -->
+  <text x="212" y="74" font-family="system-ui, Arial, sans-serif" font-size="7" fill="rgba(255,255,255,0.3)" letter-spacing="0.5">LOGO TEMPORAL</text>
+</svg>

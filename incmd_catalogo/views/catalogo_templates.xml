@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="catalogo_layout" name="Layout Base Catálogo INCOMEL / Tecnialiado">
+    <html lang="es">
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <t t-call-assets="web.assets_frontend" t-js="false"/>
+            <t t-call-assets="web.assets_frontend" t-css="false"/>
+            <style type="text/css">
+                html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;}
+                body{background:#f7f7f5;color:#2d2c2a;margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+                #wrapwrap,#wrap,main,.oe_structure,.o_website_preview{height:auto!important;min-height:100vh!important;overflow-y:visible!important;overflow-x:hidden!important;}
+                .incmd-header{background:#fff;border-bottom:1px solid #e8e6e3;position:sticky;top:0;z-index:20;}
+                .incmd-header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 0;}
+                .incmd-logo-primary img{height:46px;width:auto;object-fit:contain;}
+                .incmd-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+                .incmd-nav a{color:#595651;text-decoration:none;font-weight:700;font-size:.88rem;padding:8px 13px;border-radius:999px;}
+                .incmd-nav a:hover,.incmd-nav a.active{background:#7dc400;color:#fff;}
+                .incmd-switch{border-left:1px solid #e8e6e3;padding-left:12px;margin-left:4px;}
+                .incmd-contact-info{text-align:right;font-size:.78rem;line-height:1.7;color:#595651;}
+                .incmd-contact-info a{color:#595651;text-decoration:none;}
+                .incmd-hero{background:linear-gradient(135deg,#2d2c2a 0%,#595651 100%);color:#fff;padding:34px 0;border-bottom:4px solid #7dc400;}
+                .incmd-hero h1{font-size:2rem;margin:0;}
+                .incmd-hero p{margin:.4rem 0 0;color:rgba(255,255,255,.78);}
+                .btn-incmd{background:#7dc400;border-color:#7dc400;color:#fff;font-weight:700;}
+                .btn-incmd:hover{background:#69a900;border-color:#69a900;color:#fff;}
+                .btn-incmd-outline{background:#fff;border:1.5px solid #7dc400;color:#5e9900;font-weight:700;}
+                .incmd-product-card{border:1px solid #e8e6e3;border-radius:16px;overflow:hidden;color:inherit;text-decoration:none;background:#fff;transition:transform .15s,box-shadow .15s;}
+                .incmd-product-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.08)!important;color:inherit;}
+                .incmd-product-img-wrapper{height:185px;background:#fff;display:flex;align-items:center;justify-content:center;}
+                .incmd-product-img{max-height:170px;max-width:100%;object-fit:contain;}
+                .incmd-cat-label{font-size:.68rem;text-transform:uppercase;color:#7a7773;font-weight:800;letter-spacing:.04em;}
+                .incmd-price{font-size:1.05rem;font-weight:900;color:#2d2c2a;}
+                .badge-disponible,.badge-no-disponible{display:inline-block;border-radius:999px;padding:5px 10px;font-size:.75rem;font-weight:800;}
+                .badge-disponible{background:#eef8dd;color:#5e9900;}
+                .badge-no-disponible{background:#f1f1f1;color:#777;}
+                .incmd-pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:28px;flex-wrap:wrap;}
+                .incmd-pagination a,.incmd-pagination span{display:flex;align-items:center;justify-content:center;min-width:36px;height:36px;padding:0 10px;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;border:1.5px solid #e8e6e3;color:#595651;background:#fff;}
+                .incmd-pagination a:hover{border-color:#7dc400;color:#7dc400;}
+                .incmd-pagination span.current{background:#7dc400;border-color:#7dc400;color:#fff;}
+                .incmd-pagination span.dots{border:none;background:none;color:#c9c4be;}
+                .incmd-pagination-info{text-align:center;font-size:.8rem;color:#7a7773;margin-top:10px;}
+                .incmd-breadcrumb{background:#fff;border-bottom:1px solid #e8e6e3;padding:10px 0;font-size:.82rem;}
+                .incmd-breadcrumb a{color:#5e9900;text-decoration:none;font-weight:700;}
+                .incmd-detail-img-main{width:100%;max-height:430px;object-fit:contain;background:#fff;border:1px solid #e8e6e3;border-radius:18px;padding:20px;}
+                .incmd-detail-thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+                .incmd-detail-thumb{width:76px;height:76px;object-fit:contain;background:#fff;border:1px solid #e8e6e3;border-radius:10px;padding:6px;cursor:pointer;}
+                                .incmd-catalog-prices{line-height:1.35;}
+                .incmd-price-label{font-weight:800;}
+                .incmd-credit-price{font-size:.9rem;font-weight:800;color:#DC1F26;margin-top:2px;}
+                .incmd-detail-prices{margin:20px 0 14px;display:flex;flex-direction:column;gap:12px;}
+                .incmd-detail-offer,.incmd-detail-credit{display:block;}
+                .incmd-detail-prices .incmd-detail-price{margin:0;}
+                .incmd-detail-price-label{font-size:1rem;font-weight:800;color:#6b7280;margin-bottom:2px;}
+                .incmd-detail-credit{margin-top:2px;}
+                .incmd-detail-credit .incmd-detail-price-label{color:#DC1F26;}
+                .incmd-detail-price-credit{color:#DC1F26!important;}
+                .incmd-detail-price{font-size:1.9rem;font-weight:900;color:#2d2c2a;line-height:1.05;margin:0;display:flex;align-items:center;}
+                .incmd-detail-credit-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+                .incmd-credit-branding{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;min-height:44px;}
+                .incmd-credit-prefix{font-size:.96rem;font-weight:400;color:#2d2c2a;line-height:1;white-space:nowrap;margin:0;display:flex;align-items:center;}
+                .incmd-credit-brand-img{display:block;height:42px;width:auto;object-fit:contain;}
+                .incmd-stock-box{background:#fff;border:1px solid #e8e6e3;border-radius:16px;padding:18px;margin:18px 0;}
+                .incmd-stock-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed #e8e6e3;padding:8px 0;}
+                .incmd-stock-row:last-child{border-bottom:0;}
+                .incmd-tabs{display:flex;gap:8px;margin-bottom:14px;border-bottom:1px solid #e8e6e3;}
+                .incmd-tab-btn{border:0;background:transparent;padding:12px 14px;font-weight:800;color:#595651;border-bottom:3px solid transparent;}
+                .incmd-tab-btn.active{color:#5e9900;border-bottom-color:#7dc400;}
+                .incmd-tab-content{display:none;background:#fff;border:1px solid #e8e6e3;border-radius:16px;padding:22px;}
+                .incmd-tab-content.active{display:block;}
+                .incmd-specs-table{width:100%;}
+                .incmd-specs-table td{padding:9px;border-bottom:1px solid #eee;}
+                .incmd-specs-table td:first-child{font-weight:800;color:#595651;width:35%;}
+
+                .incmd-catalog-main{padding:18px 0 24px;height:auto!important;overflow:visible!important;}
+                .incmd-products-scroll{height:auto!important;max-height:none!important;overflow:visible!important;padding:4px 0 18px 0;}
+                .incmd-products-scroll .row{height:auto!important;max-height:none!important;overflow:visible!important;}
+                .incmd-products-scroll::-webkit-scrollbar{width:8px;}
+                .incmd-products-scroll::-webkit-scrollbar-track{background:#efede9;border-radius:999px;}
+                .incmd-products-scroll::-webkit-scrollbar-thumb{background:#c9c4be;border-radius:999px;}
+                .incmd-products-scroll::-webkit-scrollbar-thumb:hover{background:#9f9a94;}
+                .incmd-catalog-toolbar{position:sticky;top:72px;z-index:10;background:#f7f7f5;padding:10px 0 8px;margin-bottom:8px;}
+                @media(max-width:768px){.incmd-products-scroll{max-height:none;overflow:visible;padding-right:0}.incmd-catalog-toolbar{position:static}}
+
+                /* Paleta exclusiva del catálogo Incomel / Almacenes Japón */
+                /* Paleta Almacenes Japón / Incomel */
+                body.catalog-incomel .incmd-hero{background:#FAB219;color:#223286;border-bottom-color:#DC1F26;}
+                body.catalog-incomel .incmd-hero h1,body.catalog-incomel .incmd-hero p{color:#223286;}
+                body.catalog-incomel .incmd-nav a{color:#223286;}
+                body.catalog-incomel .incmd-nav a:hover,body.catalog-incomel .incmd-nav a.active{background:#223286;color:#fff;}
+                body.catalog-incomel .btn-incmd{background:#223286;border-color:#223286;color:#fff;}
+                body.catalog-incomel .btn-incmd:hover{background:#1b286b;border-color:#1b286b;color:#fff;}
+                body.catalog-incomel .btn-incmd-outline{background:#fff;border-color:#223286;color:#223286;}
+                body.catalog-incomel .badge-disponible{background:#FAB219;color:#223286;}
+                body.catalog-incomel .incmd-pagination a:hover{border-color:#223286;color:#223286;}
+                body.catalog-incomel .incmd-pagination span.current{background:#223286;border-color:#223286;color:#fff;}
+                body.catalog-incomel .incmd-breadcrumb{background:#FAB219;border-bottom-color:#DC1F26;color:#223286;}
+                body.catalog-incomel .incmd-breadcrumb a{color:#223286;}
+                body.catalog-incomel .incmd-tab-btn.active{color:#223286;border-bottom-color:#DC1F26;}
+                body.catalog-incomel .incmd-footer{background:#FAB219;color:#223286;border-top-color:#DC1F26;}
+                body.catalog-incomel .incmd-footer-title{color:#223286;}
+                body.catalog-incomel .incmd-footer-contact a{color:#223286;}
+                body.catalog-incomel .incmd-footer-copy{color:#223286;}
+                .incmd-footer{background:#242321;color:#e8e6e3;padding:30px 0 20px;border-top:4px solid #7dc400;}
+                .incmd-footer-inner{max-width:1140px;margin:0 auto;padding:0 16px;display:flex;gap:28px;align-items:flex-start;justify-content:space-between;}
+                .incmd-footer-marcas{flex:1;}
+                .incmd-footer-title{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:#7dc400;font-weight:900;margin-bottom:12px;}
+                .incmd-footer-marcas-grid{display:grid;grid-template-columns:repeat(4,minmax(90px,1fr));gap:12px;max-width:620px;}
+                .incmd-marca-item{background:#fff;border-radius:12px;min-height:68px;display:flex;align-items:center;justify-content:center;padding:10px;}
+                .incmd-marca-item img{max-height:46px;max-width:100%;object-fit:contain;}
+                .incmd-footer-contact{text-align:right;min-width:230px;margin-left:auto;}
+                .incmd-footer-contact a{color:#e8e6e3;text-decoration:none;}
+                .incmd-footer-copy{color:rgba(232,230,227,.55);font-size:.72rem;margin-top:14px;}
+                @media(max-width:768px){.incmd-header-inner{flex-direction:column;align-items:flex-start}.incmd-contact-info{text-align:left}.incmd-footer-inner{flex-direction:column}.incmd-footer-contact{text-align:left}.incmd-footer-marcas-grid{grid-template-columns:repeat(2,1fr)}.incmd-switch{border-left:0;padding-left:0;margin-left:0}.incmd-hero h1{font-size:1.55rem}.incmd-credit-brand-img{height:30px}.incmd-detail-price{font-size:1.7rem}.incmd-detail-credit-row{align-items:flex-start;gap:10px}.incmd-credit-branding{min-height:auto;align-items:center}.incmd-credit-prefix{white-space:normal;line-height:1.2}}
+            </style>
+        </head>
+        <body t-att-class="'catalog-' + catalog['key']">
+            <header class="incmd-header">
+                <div class="container incmd-header-inner">
+                    <div class="incmd-logo-primary">
+                        <a t-att-href="catalog['catalog_url']"><img t-att-src="catalog['logo']" t-att-alt="catalog['name']"/></a>
+                    </div>
+                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                        <nav class="incmd-nav">
+                            <a t-att-href="catalog['catalog_url']" t-att-class="'active' if '/catalogo' in request.httprequest.path or request.httprequest.path in (catalog['base_path'], catalog['base_path'] + '/') else ''">Catálogo</a>
+                        </nav>
+                        <div class="incmd-contact-info">
+                            <div>&#128222; <a t-att-href="'tel:' + catalog['phone_href']"><t t-esc="catalog['phone']"/></a></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <t t-out="0"/>
+
+            <footer class="incmd-footer">
+                <div class="incmd-footer-inner">
+                    <div class="incmd-footer-contact">
+                        <p class="incmd-footer-title">Contacto</p>
+                        <div><a t-att-href="'tel:' + catalog['phone_href']"><t t-esc="catalog['phone']"/></a></div>
+                        <p class="incmd-footer-copy">&#169; <t t-esc="catalog['name']"/> &#8212; Todos los derechos reservados</p>
+                    </div>
+                </div>
+            </footer>
+            <t t-call-assets="web.assets_frontend" t-css="false"/>
+        </body>
+    </html>
+</template>
+
+<template id="catalogo_home_template" name="Catálogo Público">
+    <t t-call="incmd_catalogo.catalogo_layout">
+        <section class="incmd-hero">
+            <div class="container text-center">
+                <h1 class="fw-bold mb-1"><t t-esc="catalog['title']"/></h1>
+            </div>
+        </section>
+
+        <section class="py-3 border-bottom bg-white">
+            <div class="container">
+                <form class="row g-2 align-items-end" t-att-action="catalog['catalog_url']" method="get">
+                    <div class="col-12 col-lg-5">
+                        <label class="form-label small text-muted mb-1" for="incmd_q">Buscar producto</label>
+                        <input id="incmd_q" class="form-control" type="search" name="q" placeholder="Buscar por nombre o descripción" t-att-value="q"/>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <label class="form-label small text-muted mb-1" for="incmd_categoria">Categoría</label>
+                        <select id="incmd_categoria" class="form-select" name="categoria_id">
+                            <option value="">Todas las categorías</option>
+                            <t t-foreach="categorias" t-as="categoria">
+                                <option t-att-value="categoria.id" t-att-selected="selected_category and selected_category.id == categoria.id">
+                                    <t t-esc="categoria.complete_name or categoria.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-2">
+                        <label class="form-label small text-muted mb-1" for="incmd_disponible">Disponibilidad</label>
+                        <select id="incmd_disponible" class="form-select" name="disponible">
+                            <option value="" t-att-selected="not disponible">Todos</option>
+                            <option value="1" t-att-selected="disponible == '1'">Disponible</option>
+                            <option value="0" t-att-selected="disponible == '0'">No Disponible</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-lg-1 d-grid"><button class="btn btn-incmd" type="submit">Buscar</button></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="incmd-catalog-main">
+            <div class="container">
+                <div class="incmd-catalog-toolbar d-flex justify-content-between align-items-center">
+                    <h2 class="h5 fw-bold mb-0">Productos</h2>
+                    <span class="text-muted small"><t t-esc="total"/> resultado(s)</span>
+                </div>
+                <t t-if="productos">
+                    <div class="incmd-products-scroll">
+                    <div class="row g-4">
+                        <t t-foreach="productos" t-as="producto">
+                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                <a t-att-href="catalog['base_path'] + '/producto/' + str(producto['id'])" class="card incmd-product-card h-100 shadow-sm">
+                                    <div class="incmd-product-img-wrapper border-bottom">
+                                        <img class="incmd-product-img p-3" t-att-src="producto['image_src']" t-att-alt="producto['name'] or 'Producto'" loading="lazy"/>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="incmd-cat-label mb-1" t-if="producto['categoria']"><t t-esc="producto['categoria']"/></div>
+                                        <h3 class="h6 fw-bold mb-2" t-esc="producto['name']"/>
+                                        <div class="mt-auto">
+                                            <div class="incmd-catalog-prices mb-2">
+                                                <div class="incmd-price" t-if="producto['special_price'] and not producto['hide_cash_price']">
+                                                    <span class="incmd-price-label">Efectivo:</span>
+                                                    <t t-if="producto['special_currency_position'] == 'before'"><span t-esc="producto['special_currency_symbol']"/> <span t-esc="producto['special_price_formatted']"/></t>
+                                                    <t t-else=""><span t-esc="producto['special_price_formatted']"/> <span t-esc="producto['special_currency_symbol']"/></t>
+                                                </div>
+                                                <div class="incmd-credit-price" t-if="producto['credit_price'] and not producto['hide_credit_price']">
+                                                    <span class="incmd-price-label">Crédito:</span>
+                                                    <t t-if="producto['credit_currency_position'] == 'before'"><span t-esc="producto['credit_currency_symbol']"/> <span t-esc="producto['credit_price_formatted']"/></t>
+                                                    <t t-else=""><span t-esc="producto['credit_price_formatted']"/> <span t-esc="producto['credit_currency_symbol']"/></t>
+                                                </div>
+                                            </div>
+                                            <span t-if="producto['x_disponible']" class="badge-disponible">Disponible</span>
+                                            <span t-else="" class="badge-no-disponible">No Disponible</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="text-center py-5 bg-white rounded-3 border">
+                        <h2 class="h4 fw-bold">No hay productos publicados</h2>
+                        <p class="text-muted mb-0">Marca productos para este catálogo desde la pestaña Catálogos Públicos.</p>
+                    </div>
+                </t>
+
+                <t t-if="total_pages and total_pages &gt; 1">
+                    <div class="incmd-pagination">
+                        <t t-if="page &gt; 1"><a t-att-href="base_url + 'page=' + str(page - 1)">&#8592;</a></t>
+                        <t t-else=""><span style="opacity:.35;cursor:not-allowed;">&#8592;</span></t>
+                        <t t-foreach="range(1, total_pages + 1)" t-as="p">
+                            <t t-if="p == page"><span class="current"><t t-esc="p"/></span></t>
+                            <t t-elif="p == 1 or p == total_pages or (p &gt;= page - 2 and p &lt;= page + 2)"><a t-att-href="base_url + 'page=' + str(p)"><t t-esc="p"/></a></t>
+                            <t t-elif="p == page - 3 or p == page + 3"><span class="dots">&#8230;</span></t>
+                        </t>
+                        <t t-if="page &lt; total_pages"><a t-att-href="base_url + 'page=' + str(page + 1)">&#8594;</a></t>
+                        <t t-else=""><span style="opacity:.35;cursor:not-allowed;">&#8594;</span></t>
+                    </div>
+                    <p class="incmd-pagination-info">Página <t t-esc="page"/> de <t t-esc="total_pages"/> &#8212; <t t-esc="page_size"/> por página</p>
+                </t>
+            </div>
+        </section>
+    </t>
+</template>
+
+<template id="catalogo_producto_template" name="Detalle de Producto">
+    <t t-call="incmd_catalogo.catalogo_layout">
+        <div class="incmd-breadcrumb"><div class="container"><a t-att-href="catalog['catalog_url']">Catálogo</a> <span>/</span> <strong t-esc="producto['name']"/></div></div>
+        <section class="py-4">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-12 col-md-5">
+                        <img t-att-src="producto['image_src']" t-att-alt="producto['name']" class="incmd-detail-img-main" id="incmd-img-main"/>
+                        <div class="incmd-detail-thumbs" t-if="producto['imagenes_extra']">
+                            <t t-foreach="producto['imagenes_extra']" t-as="img_extra"><img t-att-src="img_extra" class="incmd-detail-thumb" onclick="document.getElementById('incmd-img-main').src=this.src;" t-att-alt="producto['name']"/></t>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <h1 style="font-size:1.6rem;font-weight:800;color:#2d2c2a;margin-bottom:4px;" t-esc="producto['name']"/>
+                        <p style="font-size:.8rem;color:#7a7773;margin-bottom:0;" t-if="producto['sku']">SKU: <t t-esc="producto['sku']"/></p>
+                        <div class="incmd-detail-prices">
+                            <div class="incmd-detail-offer" t-if="producto['special_price'] and not producto['hide_cash_price']">
+                                <div class="incmd-detail-price-label">Precio Efectivo</div>
+                                <div class="incmd-detail-price">
+                                    <t t-if="producto['special_currency_position'] == 'before'"><span><t t-esc="producto['special_currency_symbol']"/> </span><t t-esc="producto['special_price_formatted']"/></t>
+                                    <t t-else=""><t t-esc="producto['special_price_formatted']"/> <span><t t-esc="producto['special_currency_symbol']"/></span></t>
+                                </div>
+                            </div>
+                            <div class="incmd-detail-credit" t-if="producto['credit_price'] and not producto['hide_credit_price']">
+                                <div class="incmd-detail-price-label">Precio Crédito</div>
+                                <div class="incmd-detail-credit-row">
+                                    <div class="incmd-detail-price incmd-detail-price-credit">
+                                    <t t-if="producto['credit_currency_position'] == 'before'"><span><t t-esc="producto['credit_currency_symbol']"/> </span><t t-esc="producto['credit_price_formatted']"/></t>
+                                    <t t-else=""><t t-esc="producto['credit_price_formatted']"/> <span><t t-esc="producto['credit_currency_symbol']"/></span></t>
+                                </div>
+                                    <div class="incmd-credit-branding">
+                                        <span class="incmd-credit-prefix">si lo llevas con tu</span>
+                                        <img src="/incmd_catalogo/static/img/credito_ya.png" alt="CRÉDITO ¡YA!" class="incmd-credit-brand-img"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span t-if="producto['x_disponible']" class="badge-disponible">Disponible</span>
+                        <span t-else="" class="badge-no-disponible">No Disponible</span>
+
+                        <div class="incmd-stock-box">
+                            <h3 class="h6 fw-bold mb-2">Existencias visibles para <t t-esc="catalog['stock_label']"/></h3>
+                            <t t-if="producto['stock_detail']">
+                                <t t-foreach="producto['stock_detail']" t-as="stock"><div class="incmd-stock-row"><span t-esc="stock['location']"/><strong><t t-esc="stock['qty']"/></strong></div></t>
+                            </t>
+                            <t t-else=""><p class="text-muted mb-0"><t t-if="catalog['key'] == 'incomel'">Sin existencia disponible en almacenes Japón</t><t t-else="">Sin existencia disponible en las ubicaciones configuradas.</t></p></t>
+                        </div>
+                        <a class="btn btn-incmd" t-att-href="'https://wa.me/' + producto['whatsapp_number'] + '?text=' + quote_plus('Hola, quiero información del producto: ' + producto['name'])" target="_blank">Consultar por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-2 pb-5">
+            <div class="container">
+                <div class="incmd-tabs"><button class="incmd-tab-btn active" onclick="incmdTab(this,'tab-desc')">Descripción</button><button class="incmd-tab-btn" t-if="producto['specs']" onclick="incmdTab(this,'tab-specs')">Especificaciones</button></div>
+                <div id="tab-desc" class="incmd-tab-content active">
+                    <t t-if="producto['description_sale'] and producto['description_sale'] != producto['name']"><p style="font-size:.92rem;color:#4b5563;line-height:1.75;"><t t-esc="producto['description_sale']"/></p></t>
+                    <t t-else=""><p class="text-muted">Sin descripción disponible.</p></t>
+                </div>
+                <div id="tab-specs" class="incmd-tab-content" t-if="producto['specs']"><table class="incmd-specs-table"><t t-foreach="producto['specs']" t-as="spec"><tr><td t-esc="spec['attr']"/><td t-esc="spec['val']"/></tr></t></table></div>
+            </div>
+        </section>
+        <script>function incmdTab(btn,id){document.querySelectorAll('.incmd-tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.incmd-tab-content').forEach(c=>c.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}</script>
+    </t>
+</template>
+
+<template id="catalogo_nosotros_template" name="Nosotros">
+    <t t-call="incmd_catalogo.catalogo_layout">
+        <section class="incmd-hero"><div class="container text-center"><h1 class="fw-bold mb-1">Nosotros</h1></div></section>
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <div style="max-width:700px;margin:0 auto;background:#fff;border:1px solid #e8e6e3;border-radius:1rem;padding:28px 32px;">
+                        <h2 class="h4 fw-bold mb-3" style="color:#595651;"><t t-esc="catalog['name']"/></h2>
+                        <t t-if="catalog['key'] == 'incomel'">
+                            <p style="font-size:.95rem;color:#4b5563;line-height:1.8;margin-bottom:20px;">Grupo empresarial guatemalteco con trayectoria en la comercialización de productos y servicios, enfocado en brindar soluciones prácticas a sus clientes.</p>
+                        </t>
+                        <t t-else="">
+                            <p style="font-size:.95rem;color:#4b5563;line-height:1.8;margin-bottom:20px;">Especialistas en herramientas, equipos y soluciones para profesionales y el sector agro-industrial en Guatemala, comprometidos con la calidad y el servicio.</p>
+                        </t>
+                        <div class="d-flex gap-3 flex-wrap justify-content-center"><a t-att-href="'tel:' + catalog['phone_href']" class="btn btn-incmd"><t t-esc="catalog['phone']"/></a></div>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <t t-if="catalog['key'] == 'incomel'">
+                        <div class="col-12 col-md-6"><div style="background:#fff;border:1px solid #e8e6e3;border-radius:1rem;padding:26px;height:100%;border-top:4px solid #e8440a;"><h2 style="font-size:1.6rem;font-weight:900;color:#e8440a;text-transform:uppercase;">Misión</h2><p style="font-size:.95rem;color:#2d2c2a;line-height:1.8;margin:0;text-align:justify;">Comercializar y financiar productos para el hogar y servicios con una preocupación constante por satisfacer y superar las demandas y expectativas de nuestros clientes.</p></div></div>
+                        <div class="col-12 col-md-6"><div style="background:#fff;border:1px solid #e8e6e3;border-radius:1rem;padding:26px;height:100%;border-top:4px solid #595651;"><h2 style="font-size:1.6rem;font-weight:900;color:#595651;text-transform:uppercase;">Visión</h2><p style="font-size:.95rem;color:#2d2c2a;line-height:1.8;margin:0;text-align:justify;">Ser la cadena de venta al detalle líder en la comercialización de artículos para el hogar y servicios, con estándares superiores de operación, rentabilidad y satisfacción del cliente.</p></div></div>
+                    </t>
+                    <t t-else="">
+                        <div class="col-12 col-md-6"><div style="background:#fff;border:1px solid #e8e6e3;border-radius:1rem;padding:26px;height:100%;border-top:4px solid #7dc400;"><h2 style="font-size:1.6rem;font-weight:900;color:#7dc400;text-transform:uppercase;">Misión</h2><p style="font-size:.95rem;color:#2d2c2a;line-height:1.8;margin:0;text-align:justify;">Proveer herramientas, equipos y soluciones de calidad a profesionales y empresas del sector productivo, impulsando su eficiencia y competitividad con marcas líderes.</p></div></div>
+                        <div class="col-12 col-md-6"><div style="background:#fff;border:1px solid #e8e6e3;border-radius:1rem;padding:26px;height:100%;border-top:4px solid #1a1a2e;"><h2 style="font-size:1.6rem;font-weight:900;color:#1a1a2e;text-transform:uppercase;">Visión</h2><p style="font-size:.95rem;color:#2d2c2a;line-height:1.8;margin:0;text-align:justify;">Ser el aliado estratégico número uno de Guatemala en herramientas y equipo profesional, reconocidos por nuestra asesoría técnica y respaldo postventa.</p></div></div>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </t>
+</template>
+
+</odoo>

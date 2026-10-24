@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menús visibles en el header estándar de Website -->
+    <record id="website_menu_incomel_public" model="website.menu">
+        <field name="name">Incomel</field>
+        <field name="url">/incomel/catalogo</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="website_menu_tecnialiado_public" model="website.menu">
+        <field name="name">Tecnialiado</field>
+        <field name="url">/tecnialiado/catalogo</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">51</field>
+    </record>
+</odoo>
