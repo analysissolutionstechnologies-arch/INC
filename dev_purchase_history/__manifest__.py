@@ -64,6 +64,7 @@ Odoo You can add remark into Purchase History of Product
     'currency':'EUR',
     #'live_test_url':'https://youtu.be/A5kEBboAh_k',
     'pre_init_hook' :'pre_init_check',
+    'license': 'LGPL-3'
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

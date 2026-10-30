@@ -29,5 +29,6 @@
     'application': False,
     'auto_install': False,
     'icon': '/custom_attachment_module/static/description/iconxim.png',
-    'images': ['static/description/iconxim.png']
+    'images': ['static/description/iconxim.png'],
+    'license': 'LGPL-3'
 }

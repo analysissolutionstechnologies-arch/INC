@@ -12,6 +12,7 @@ from odoo import fields, models, api
 
 class purchase_history(models.Model):
     _name = 'purchase.history'
+    _description = 'purchase history'
     _rec_name= 'po_order'
     _order = 'id desc'
 

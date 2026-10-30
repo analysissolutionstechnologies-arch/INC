@@ -13,11 +13,13 @@ from odoo import fields, models
 
 class purchase_product_history(models.TransientModel):
     _name = "purchase.product.history"
+    _description = "purchase product history"
 
     purchase_product_line = fields.One2many('purchase.history.line','product_his_id',string="PO Line")
     
 class purchase_product_history_line(models.TransientModel):
     _name = "purchase.history.line"
+    _description = "purchase history line"
     
     product_his_id = fields.Many2one('purchase.product.history')
     supplier_id = fields.Many2one('res.partner',string="Supplier")
