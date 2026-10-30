@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unit_read,unit.read,model_incmd_request_unit,group_user,1,0,0,0
+access_unit_admin,unit.admin,model_incmd_request_unit,group_admin,1,1,1,1
+access_assignment_read,assignment.read,model_incmd_request_assignment,group_user,1,0,0,0
+access_assignment_admin,assignment.admin,model_incmd_request_assignment,group_admin,1,1,1,1
+access_reason_read,reason.read,model_incmd_request_reason,group_user,1,0,0,0
+access_reason_admin,reason.admin,model_incmd_request_reason,group_admin,1,1,1,1
+access_process_read,process.read,model_incmd_request_process,group_user,1,0,0,0
+access_process_admin,process.admin,model_incmd_request_process,group_admin,1,1,1,1
+access_stage_read,stage.read,model_incmd_request_stage,group_user,1,0,0,0
+access_stage_admin,stage.admin,model_incmd_request_stage,group_admin,1,1,1,1
+access_transition_read,transition.read,model_incmd_request_transition,group_user,1,0,0,0
+access_transition_admin,transition.admin,model_incmd_request_transition,group_admin,1,1,1,1
+access_request_user,request.user,model_incmd_request,group_user,1,1,1,1
+access_history_read,history.read,model_incmd_request_history,group_user,1,0,0,0
+access_action_user,action.user,model_incmd_request_action,group_user,1,1,1,1

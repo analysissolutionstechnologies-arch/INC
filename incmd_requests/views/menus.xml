@@ -1,0 +1,12 @@
+<odoo>
+<menuitem id="menu_requests_root" name="Solicitudes" sequence="12" web_icon="incmd_requests,static/description/icon.png" groups="group_user"/>
+<menuitem id="menu_my" name="Mis solicitudes" parent="menu_requests_root" action="action_my_requests" sequence="10"/>
+<menuitem id="menu_inbox" name="Bandeja de atención" parent="menu_requests_root" action="action_inbox" sequence="20"/>
+<menuitem id="menu_supervision" name="Supervisión" parent="menu_requests_root" action="action_supervision" groups="group_supervisor" sequence="30"/>
+<menuitem id="menu_reports" name="Reportes" parent="menu_requests_root" action="action_reports" groups="group_supervisor" sequence="40"/>
+<menuitem id="menu_config" name="Configuración" parent="menu_requests_root" groups="group_admin" sequence="90"/>
+<menuitem id="menu_unit" name="Áreas y tiendas" parent="menu_config" action="action_unit" sequence="10"/>
+<menuitem id="menu_assign" name="Usuarios y perfiles" parent="menu_config" action="action_assignment" sequence="20"/>
+<menuitem id="menu_process" name="Procesos y versiones" parent="menu_config" action="action_process" sequence="30"/>
+<menuitem id="menu_reason" name="Motivos" parent="menu_config" action="action_reason" sequence="40"/>
+</odoo>

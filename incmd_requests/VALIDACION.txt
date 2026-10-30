@@ -1,0 +1,11 @@
+Validación estática contra código oficial Odoo 19.0
+
+OK: importación de modelos y asistentes.
+OK: sintaxis Python.
+OK: manifiesto y archivos declarados.
+OK: referencias locales XML/CSV.
+OK: XML y validación oficial de listas, búsqueda y pivote.
+OK: XPath de integración con Empleados.
+
+13 pruebas TransactionCase incluidas, NO ejecutadas.
+Pendiente: instalación en Odoo 19 Community con PostgreSQL y verificación visual.
