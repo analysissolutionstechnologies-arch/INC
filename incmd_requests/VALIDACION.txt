@@ -1,0 +1,5 @@
+Versión 19.0.2.0.0
+OK: sintaxis Python, XML, manifiesto y archivos declarados.
+OK: compilación de las ocho plantillas Owl.
+Pendiente: instalación en Odoo 19 con PostgreSQL y pruebas TransactionCase.
+Pendiente: comprobación visual completa en Odoo. No fue posible iniciar Chromium en esta revisión.

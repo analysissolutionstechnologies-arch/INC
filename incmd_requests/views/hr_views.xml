@@ -1,0 +1,12 @@
+<odoo>
+<record id="employee_form_requests" model="ir.ui.view">
+ <field name="name">hr.employee.form.requests</field>
+ <field name="model">hr.employee</field>
+ <field name="inherit_id" ref="hr.view_employee_form"/>
+ <field name="arch" type="xml">
+  <xpath expr="//field[@name='department_id']" position="after">
+   <field name="request_unit_id" groups="incmd_requests.group_admin" options="{'no_create':True}"/>
+  </xpath>
+ </field>
+</record>
+</odoo>
