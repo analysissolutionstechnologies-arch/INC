@@ -1,9 +1,0 @@
-<odoo>
-<record id="workspace_mine" model="ir.actions.client"><field name="name">Mis solicitudes</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'list','mode':'mine'}"/></record>
-<record id="workspace_inbox" model="ir.actions.client"><field name="name">Bandeja del área</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'list','mode':'inbox'}"/></record>
-<record id="workspace_supervision" model="ir.actions.client"><field name="name">Supervisión</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'list','mode':'supervision'}"/></record>
-<record id="workspace_units" model="ir.actions.client"><field name="name">Áreas y tiendas</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'config','section':'units'}"/></record>
-<record id="workspace_assignments" model="ir.actions.client"><field name="name">Usuarios y perfiles</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'config','section':'assignments'}"/></record>
-<record id="workspace_reasons" model="ir.actions.client"><field name="name">Motivos</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'config','section':'reasons'}"/></record>
-<record id="workspace_processes" model="ir.actions.client"><field name="name">Procesos y versiones</field><field name="tag">incmd_requests.workspace</field><field name="params" eval="{'page':'config','section':'processes'}"/></record>
-</odoo>
