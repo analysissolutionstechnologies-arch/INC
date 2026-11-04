@@ -1,0 +1,8 @@
+19.0.2.1.0
+OK: sintaxis Python y XML.
+OK: compilación de las ocho plantillas Owl.
+OK: CSS corregido compila con libsass.
+OK: manifiesto y rutas.
+Verificado import y props de Chatter contra fuentes oficiales Odoo 19; integración visual pendiente.
+Añadidas cuatro pruebas TransactionCase de traslado, permisos, inmutabilidad y auditoría. NO ejecutadas: no hay instancia Odoo/PostgreSQL en el entorno.
+Pendiente: instalar/actualizar en base de pruebas Odoo 19 y ejecutar suite completa.
