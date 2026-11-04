@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="incmd_app_launcher.NavBar" t-inherit="web.NavBar" t-inherit-mode="extension">
+        <xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="replace">
+            <button t-ref="incmdToggle" type="button" class="incmd_home_button" title="Aplicaciones" aria-label="Abrir aplicaciones" t-att-aria-expanded="incmdLauncher.open ? 'true' : 'false'" aria-controls="incmd_application_home" t-on-click="incmdToggleLauncher">
+                <i class="oi oi-apps" aria-hidden="true"/>
+            </button>
+            <t t-if="ui.isSmall and !incmdLauncher.open" t-call="web.NavBar.AppsMenu">
+                <t t-set="apps" t-value="menuService.getApps()"/>
+            </t>
+        </xpath>
+        <xpath expr="//nav[contains(@class, 'o_main_navbar')]" position="attributes">
+            <attribute name="t-att-class">{'incmd_launcher_active': incmdLauncher.open}</attribute>
+        </xpath>
+        <xpath expr="//header" position="inside">
+            <section t-if="incmdLauncher.open" id="incmd_application_home" class="incmd_launcher" aria-label="Aplicaciones">
+                <div class="incmd_launcher_content">
+                    <div class="incmd_launcher_toolbar">
+                        <h1>Aplicaciones</h1>
+                        <div class="incmd_search_box">
+                            <i class="fa fa-search" aria-hidden="true"/>
+                            <input t-ref="incmdSearch" type="search" t-model="incmdLauncher.query" placeholder="Buscar aplicaciones…" aria-label="Buscar aplicaciones"/>
+                        </div>
+                        <button type="button" class="incmd_close" title="Cerrar" aria-label="Cerrar aplicaciones" t-on-click="incmdCloseLauncher"><i class="fa fa-times" aria-hidden="true"/></button>
+                    </div>
+                    <div class="incmd_apps_grid">
+                        <button t-foreach="incmdApps" t-as="app" t-key="app.id" type="button" class="incmd_app_tile" t-att-disabled="incmdLauncher.busy" t-att-data-menu-xmlid="app.xmlid" t-on-click="() => this.incmdOpenApp(app)">
+                            <span class="incmd_app_icon">
+                                <img t-if="app.webIconData" t-att-src="app.webIconData" alt=""/>
+                                <span t-else="" class="incmd_app_fallback" t-esc="app.name.substring(0, 1)"/>
+                            </span>
+                            <span class="incmd_app_name" t-esc="app.name"/>
+                        </button>
+                    </div>
+                    <p t-if="!incmdApps.length" class="incmd_empty">No hay aplicaciones disponibles para esta búsqueda.</p>
+                </div>
+            </section>
+        </xpath>
+    </t>
+</templates>

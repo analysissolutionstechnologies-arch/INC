@@ -1,0 +1,31 @@
+/* Plain CSS: no dependency on Sass variables from other themes. */
+.incmd_home_button { border: 0; background: transparent; color: inherit; min-width: 48px; font-size: 21px; cursor: pointer; }
+.incmd_home_button:hover { background: rgba(128,128,128,.12); }
+.incmd_launcher { position: fixed; inset: var(--o-navbar-height, 48px) 0 0; z-index: 1030; overflow-y: auto; background: #f1f2f3; color: #334155; isolation: isolate; }
+.incmd_launcher::before { content: ""; position: fixed; width: 480px; height: 480px; border: 60px solid rgba(113,75,103,.025); border-radius: 100px; transform: rotate(35deg); right: -260px; bottom: -190px; pointer-events: none; z-index: -1; }
+.incmd_launcher_content { max-width: 950px; margin: 0 auto; padding: 30px 36px 60px; }
+.incmd_launcher_toolbar { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.incmd_launcher_toolbar h1 { font-size: 19px; font-weight: 500; margin: 0; flex: 1; }
+.incmd_search_box { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #ddd; border-radius: 7px; padding: 8px 12px; width: 280px; }
+.incmd_search_box input { min-width: 0; width: 100%; border: 0; outline: none; background: transparent; color: inherit; font-size: 14px; }
+.incmd_close { border: 0; background: transparent; color: #64748b; font-size: 19px; padding: 8px; border-radius: 6px; cursor: pointer; }
+.incmd_apps_grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 25px 18px; }
+.incmd_app_tile { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 9px 3px; border: 0; border-radius: 9px; color: #475569; background: transparent; cursor: pointer; min-width: 0; }
+.incmd_app_tile:hover { background: rgba(113,75,103,.06); }
+.incmd_app_tile:focus-visible, .incmd_home_button:focus-visible, .incmd_close:focus-visible { outline: 2px solid #714b67; outline-offset: 3px; }
+.incmd_app_icon { width: 62px; height: 62px; display: flex; align-items: center; justify-content: center; border: 1px solid #d8dadd; border-radius: 5px; background: #fff; box-shadow: 0 3px 5px #00000012; transition: transform .15s ease; }
+.incmd_app_tile:hover .incmd_app_icon { transform: translateY(-3px); }
+.incmd_app_icon img { width: 48px; height: 48px; object-fit: contain; }
+.incmd_app_fallback { font-size: 30px; font-weight: 600; color: #714b67; }
+.incmd_app_name { font-size: 12px; line-height: 1.35; text-align: center; overflow-wrap: anywhere; }
+.incmd_empty { text-align: center; padding: 50px 0; color: #64748b; }
+@media (max-width: 767px) { .incmd_launcher_content { padding: 24px 16px; } .incmd_apps_grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px 8px; } .incmd_launcher_toolbar { flex-wrap: wrap; gap: 10px; } .incmd_search_box { width: 100%; order: 3; } }
+@media (max-width: 420px) { .incmd_apps_grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media (prefers-reduced-motion: reduce) { .incmd_app_icon { transition: none; } }
+
+/* Keep the global controls; show app navigation only inside an app. */
+.o_main_navbar.incmd_launcher_active > .o_menu_brand,
+.o_main_navbar.incmd_launcher_active > .o_menu_sections,
+.o_main_navbar.incmd_launcher_active > .o_navbar_breadcrumbs {
+    display: none !important;
+}
